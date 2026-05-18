@@ -107,3 +107,17 @@
 
 
 
+# student = {
+#     '이름': '홍길동',
+#     '나이': 25
+# }
+
+# print(f'나이: {student['나이']}')       #나이: 25
+
+# def modifyStudentAge():
+#     student['나이'] += 1
+
+# modifyStudentAge()
+
+# print(student['나이'])                 #26
+
