@@ -1,0 +1,109 @@
+# # -PC방 자리 관리 프로그램 
+# '''
+# 너는 PC방 사장이다.
+# 손님이 자리에 앉으면 "사용중" 으로 바뀌고, 비어있으면 예약할 수 있다.
+
+# 프로그램 요구사항
+# 1.현재 자리 상태를 전부 출력하기
+# 2. 사용자에게 원하는 자리 번호 입력받기
+# 3.예약할 자리 번호 : 빈자리라면 "예약 완료" 출력 
+# 해당 자리 상태를 "사용중" 으로 변경 
+# 이미 사용중이라면 "이미 사용중인 자리입니다" 출력
+# 4.예약 후 전체 자리 상태 다시 출력하기
+# '''
+
+# seats = {
+#     1: '빈자리',
+#     2: '사용중',
+#     3: '빈자리',
+#     4: '사용중',
+#     5: '빈자리'
+# }
+
+# cnt = 0
+# cleanSeat = 0
+# useSeat = 0
+
+# for seat in seats:
+#     print(f'좌석 현황: {seats}')
+#     selectedSeat = int(input('좌석 선택: '))
+
+#     if selectedSeat == seats[1] or selectedSeat == seats[3] or selectedSeat == seats[5]:
+#         print(f' 예약 완료')
+#         seats[selectedSeat] = '사용중'
+        
+#     elif selectedSeat == seats[2] or selectedSeat == seats[4]:
+#         print(f'이미 사용중인 자리입니다.')
+
+# print(f'좌석 최신: {seats}')
+
+
+
+# # - 배달 주문 통계 프로그램 
+# # 배달 앱에서 하루 주문 데이터를 분석하려고 한다.
+# # 주어진 주문 목록
+# # orders = [
+# #     "치킨",
+# #     "피자",
+# #     "치킨",
+# #     "햄버거",
+# #     "피자",
+# #     "치킨"
+# # ]
+# # 프로그램 요구사
+
+# # 1. 각 음식이 몇 번 주문됐는지 딕셔너리에 저장하기
+# # 2. 가장 많이 주문된 음식 찾기
+# # 3. 총 주문 개수 출력하기
+# # 4. 사용자가 음식 이름 입력하면
+# # 몇 번 주문됐는지 출력하기
+
+# orders = ["치킨","피자","치킨","햄버거","피자","치킨"]
+
+
+
+# # -시험 결과 분석 프로그램 
+# # 학원에서 시험 결과를 분석하려고 한다.
+# # 주어진 데이터
+# # scores = {
+# #     "민수": 88,
+# #     "지훈": 72,
+# #     "수아": 95,
+# #     "유진": 64,
+# #     "서연": 100
+# # }
+# # 프로그램 요구사항
+# # 1.전체 학생 점수 출력하기
+# # 2.평균 점수 계산하기
+# # 3.최고 점수 학생 찾기
+# # 4.60점 이상은 합격, 미만은 불합격 출력하기
+# # 5.90점 이상 학생 수 출력하기
+# # 6.점수 높은 순으로 학생 출력 도전하기
+
+# scores = {
+#     "민수": 88,
+#     "지훈": 72,
+#     "수아": 95,
+#     "유진": 64,
+#     "서연": 100
+# }
+# total = 0
+# average = 0
+# scoreList = list(scores)
+# print(f'scoreList: {scoreList}')
+# print(f'scoreList type: {type(scoreList)}')
+
+# print(f'scores:{scoreList}')
+
+# for score in scoreList:
+#     total += score
+#     average = total / len(scoreList)
+# print(f'scores의 average: {average:.2f}')
+
+# maxScore = 0
+# for score in scoreList:
+#     if score > maxScore:
+#         maxScore = score
+
+# print(f'최고 점수 학생: {maxScore}')
+
