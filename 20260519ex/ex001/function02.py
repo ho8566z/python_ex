@@ -1,0 +1,459 @@
+# # 지역변수 vs 전역변수
+# # 지역변수는 함수 내부에서 선언된 변수로 함수 내부에서만 사용 가능하다
+# # 전역변수는 함수 외부에서 선언된 변수로 함수 외부와 내부에서도 모두 사용 가능하다
+
+# # # ex)
+# # num = 10
+
+# # def fun():
+# #     num = 20                    #지역변수 등장
+# #     print(f'num: {num}')        #전역변수, num: 10 --> 지역변수, num: 20
+
+# # print(f'num: {num}')            #전역변수, num: 10
+
+# # fun()
+
+
+# # ex2)
+# num = 10
+
+# def fun():
+#     # num = 20                  #지역변수 등장
+#     num = num +1                #데이터 수정 num(전역변수) = 10 + 1
+# #UnboundLocalError: cannot access local variable 'num' where it is not associated with a value
+# #파이썬에서는, 전역변수를 함수에 가져와서 참조하는 것은 가능하지만, 수정하는 것은 불가능하다
+# #때문에, 'global'키워드를 사용해 이를 해결한다
+#     print(f'num: {num}')        #전역변수, num: 10 --> 지역변수, num: 20
+
+# print(f'num: {num}')            #전역변수, num: 10
+
+# fun()
+
+# '''
+# global 키워드는 함수 내에서 전역변수의 값을 '수정'하고자 할때 반드시 명시할 것
+# '''
+
+
+# # quiz - 웹사이트의 누적방문 횟수 프로그램
+# # 웹사이트 방문 여부를 입력받아 웹사이트의 누적 방문 횟수를 출력하자
+
+# flag = True
+# totalVisitior = 0
+
+# def countVisitor():
+#     global totalVisitior
+#     totalVisitior += 1
+
+
+# while flag:
+#     selectedMenuNumber = int(input('1.웹사이트 방문    2.종료'))
+
+#     if selectedMenuNumber == 1:
+#         countVisitor()
+#         print(f'누적 방문자 수: {totalVisitior}')
+
+#     else:
+#         flag = False
+#         print('Good Bye')
+
+# countVisitor()
+# # 1.웹사이트 방문    2.종료1
+# # 누적 방문자 수: 1
+# # 1.웹사이트 방문    2.종료1
+# # 누적 방문자 수: 2
+# # 1.웹사이트 방문    2.종료1
+# # 누적 방문자 수: 3
+# # 1.웹사이트 방문    2.종료2
+# # Good Bye
+
+
+
+
+# 매개변수
+# 매개: 둘 사이에서 양 편의 '관계를 맺어'주는 것
+# 함수를 사용하기 위해 먼저 함수를 정의하고 필요할 때 호출하는데,
+# 이 때 함수를 정의하는 쪽을 함수(정의부), 함수를 호출하는 쪽을 호출부라고 한다
+
+# 함수를 호출할 때, 데이터를 넘겨줄 수 있는데 이 데이터를 '인수'라고 한다
+# 함수 정의부는 인수를 받으면, '매개변수'라는 변수에 저장한다
+# -> 매개변수는 지역변수의 일종이다
+
+
+# # ex)
+# def greet():
+#     print(f'홍길동 님 안녕하세요.')
+
+# greet()
+
+
+# # ex2)
+# def greet(name):
+#     #neme = '홍길동' or '박찬호' or '박세리'
+#     print(f'{name}님 안녕하세요.')
+
+# greet('홍길동')
+# greet('박찬호')
+# greet('박세리')
+# # 홍길동님 안녕하세요.
+# # 박찬호님 안녕하세요.
+# # 박세리님 안녕하세요.
+
+
+# # ex3)
+# def greet(name, age, addr):
+#     #neme = '홍길동' or '박찬호' or '박세리'
+#     print(f'{name}님 안녕하세요. 나이는 {age}입니다. 출신지는 {addr}입니다.')
+
+# greet('홍길동', 25, '서울')
+# greet('박찬호', 30, 'LA')
+# greet('박세리', 35, '대전')
+# # 홍길동님 안녕하세요. 나이는 25입니다. 출신지는 서울입니다.
+# # 박찬호님 안녕하세요. 나이는 30입니다. 출신지는 LA입니다.
+# # 박세리님 안녕하세요. 나이는 35입니다. 출신지는 대전입니다.
+
+
+# name = '홍길동' or '박찬호' or '박세리'
+# name: 매개변수 <--지역변수의 일종, 함수 내부에서만 사용 가능
+# '홍길동' or '박찬호' or '박세리': 인수 <--출력하고자 하는 데이터의 일종
+
+# 전달하고자 하는 데이터를 인수로서 매개변수에 전달하면 매개변수는 일종의 
+# 지역변수로서 인수를 전달받아 출력 등으로 기능/작동한다 
+
+# 매개변수는 2개 이상, 동시 사용이 가능하다 --> 매개변수의 개수만큼, 
+# 인수 또한 개수를 맞춰줘야 한다
+
+
+
+# # quiz - 기상청 프로그램
+
+# def forecastWeather(temp, humi, rain):
+#     print('날씨 예보입니다.')
+#     print(f'최고 온도: {temp}')
+#     print(f'평균 습도: {humi}')
+#     print(f'강우 확률: {rain}')
+
+# forecastWeather(35, 70, 80)
+# # 날씨 예보입니다.
+# # 최고 온도: 35
+# # 평균 습도: 70
+# # 강우 확률: 80
+
+
+
+# # 인수의 개수를 모르는 경우
+# # 우리 학급 학생들의 시험점수 총합과 평균을 구하는 함수를 만들자
+# # 우리 학급 학생수는 총 3명이다
+
+# # 1차(: 3명일때 - 하드코딩)
+# def printScoreForStudent(score1, score2, score3):
+#     totalScore = score1 + score2 + score3
+#     averageScore = totalScore / 3
+
+#     print(f'총합: {totalScore}')
+#     print(f'평균: {averageScore}')
+
+# printScoreForStudent(90, 80, 100)
+# # 총합: 270
+# # 평균: 90.0
+
+
+# # 2차(: 인수의 개수를 몰라도 적용 가능함)
+# def printScoreForStudent(*scores):      
+# # '*(가변인자)'를 사용하면 자동으로 '튜플'로서 전달해 기능한다
+#     print(f'scores type: {type(scores)}')   #scores type: <class 'tuple'>
+#     print(f'scores length: {len(scores)}')  #scores length: 인수의 개수만큼
+
+#     totalScore = 0
+#     for score in scores:
+#         totalScore += score
+#         averageScore = totalScore / len(scores)
+
+#     print(f'총합: {totalScore}')
+#     print(f'평균: {averageScore}')
+
+# printScoreForStudent(90, 80, 100, 60, 70)
+# # 총합: 400
+# # 평균: 80.0
+
+
+
+# # 3차(: 인수의 개수를 몰라도 적용 가능함 + 2개 이상의 매개변수)
+# def printScoreForStudent(subject, *scores):      
+# # '*(가변인자)'를 사용하면 자동으로 '튜플'로서 전달해 기능한다
+# # '*(가변인자)'는 마지막 매개변수에만 작성해야 한다
+#     print(f'scores type: {type(scores)}')   #scores type: <class 'tuple'>
+#     print(f'scores length: {len(scores)}')  #scores length: 인수의 개수만큼
+
+#     totalScore = 0
+#     for score in scores:
+#         totalScore += score
+#         averageScore = totalScore / len(scores)
+        
+#     print(f'{subject} 과목 총합: {totalScore}')
+#     print(f'{subject} 과목 평균: {averageScore}')
+
+# printScoreForStudent('국어', 90, 80, 100, 60, 70)
+# # 국어 과목 총합: 400
+# # 국어 과목 평균: 80.0
+
+
+# # 4차(예외)
+# '''
+# 교사가 몇명일지 모르는 학생들의 점수를 입력할 때, 학생 점수의 총합과 평균을 구하는
+# 함수를 만들어 이용가능한 프로그램을 만들자
+# '''
+
+# flag = True
+# studentScores = []
+
+# def printScoreForStudent(scores):       #scores = [,,,,,,,,]
+#     if len(scores) == 0:
+#         print('학생수가 0명이라 총점과 평균을 구할 수 없다')
+
+#     else:
+#         pass
+
+#         totalScore = 0
+#         for score in scores:
+#             totalScore += score
+#             averageScore = totalScore / len(scores)
+
+#         print(f'총점: {totalScore}')
+#         print(f'평균: {averageScore}')
+
+# while flag:
+#     selectedMenuNum = int(input('1.학생 점수입력     2.종료'))
+#     if selectedMenuNum == 1:
+#         score = int(input('학생 점수 입력: '))
+#         studentScores.append(score)
+#     else:
+#         flag = False
+
+# printScoreForStudent(studentScores)
+# # 1.학생 점수입력     2.종료1
+# # 학생 점수 입력: 80
+# # 1.학생 점수입력     2.종료1
+# # 학생 점수 입력: 90
+# # 1.학생 점수입력     2.종료1
+# # 학생 점수 입력: 100
+# # 1.학생 점수입력     2.종료2
+# # 총점: 270
+# # 평균: 90.0
+
+# # 1.학생 점수입력     2.종료2
+# # 학생수가 0명이라 총점과 평균을 구할 수 없다
+
+
+# # studentScores라는 전역변수를 while문에서 수정했음에도 오류가 발생하지 않은 이유
+# # -> 'studentScores'라는 변수가 레퍼런스 타입의 '리스트'이기 때문에
+# # --> 리스트 같은 레퍼런스 타입은 데이터를 직접 갖고있지 않고, 리스트 내부의 첫번쨰
+# # 데이터의 주소 값을 가지고 있기 때문에 변경/수정되어도 오류가 발생하지 않는다
+
+
+# flag변수 vs while문의 break
+# flag변수의 경우, 해당되는 함수나 for문, if문, whilw문의 바깥에서도 컨트롤이 가능하지만,
+# while문의 break의 경우에는 해당되는 함수나 for문, if문, whilw문의 내부에서만 컨트롤이
+# 가능하기 때문에 'flag'변수가 break보다 더 깔끔하게 기능한다
+
+
+
+# # quiz - SMS와 MMS 구별하기
+# '''
+# 문자를 보낼 때 100자 이하인 경우에는 단문 메세지(SMS)로 50원을 부과합니다.
+# 그런데 100자를 넘어가면 장문 메세지(MMS)로 변경되면서 100원이 부과됩니다.
+# 단문과 장문을 구별해서 돈을 부과하는 프로그램을 만들자
+# '''
+
+# def sendUserMessage(str):
+#     strLength = len(str)
+#     print(f'사용자가 입력한 문자길이: {strLength}')
+
+#     if strLength <= 100:
+#         print(f'SMS 발송완료')
+#         print('50분 부과')
+#     else:
+#         print(f'MMS 발송완료')
+#         print('100분 부과')
+
+# inputData = input('문자 입력: ')
+# sendUserMessage(inputData)
+# # 문자 입력: Hello, I'm Yunho.
+# # 사용자가 입력한 문자길이: 17
+# # SMS 발송완료
+# # 50분 부과
+
+
+
+# # 인수와 매개변수의 순서가 일치하지 않을 경우
+# def printMemberInfo(name, email, major, grade):
+#     print(f'name\t: {name}')
+#     print(f'email\t: {email}')
+#     print(f'major\t: {major}')
+#     print(f'grade\t: {grade}')
+#     print('----------------------------------')
+
+# printMemberInfo('Hong Gildong', 'gildomg@gmail.com', 'art', 1)
+# # name    : Hong Gildong
+# # email   : gildomg@gmail.com
+# # major   : art
+# # grade   : 1
+# # ----------------------------------
+
+# printMemberInfo('gildomg@gmail.com', 'art', 'Hong Gildong', 1)
+# # name    : gildomg@gmail.com
+# # email   : art
+# # major   : Hong Gildong
+# # grade   : 1
+# # ----------------------------------
+
+# printMemberInfo(email='gildomg@gmail.com', 
+#                 major='art', 
+#                 name='Hong Gildong', 
+#                 grade=1)
+# # name    : Hong Gildong
+# # email   : gildomg@gmail.com
+# # major   : art
+# # grade   : 1
+# # ----------------------------------
+# #('매개변수=인수'의 형식으로 작성한다면, 매개변수와 인수의 인덱스번호가 다르더라도 
+# # 원래의 목적에 따르는 방향으로, 매개변수와 인수간 정확한 관계로 이어진다)
+# # But, 매개변수의 순서에 맞게 인수를 작성하는 것을 우선해서 엄격해야 한다
+
+# def printMemberInfo(info):
+#     print(f'email: {info['email']}')
+#     print(f'major: {info['major']}')
+#     print(f'grade: {info['grade']}')
+#     print(f'name: {info['name']}')
+
+# printMemberInfo(
+#     {
+#         'name': 'Hong Gildong', 
+#         'email': 'gildong@gmail.com',
+#         'major': 'art',
+#         'grade': 1
+#     }
+# )
+
+# # email: gildong@gmail.com
+# # major: art
+# # grade: 1
+# # name: Hong Gildong
+
+
+# 변수명: 명사와 명사 조합 위주로 / 함수명: 작동하는 기능을 알수 있게(동사+명사 조합으로)
+
+
+
+# # 매개변수의 기본값 설정
+# # 직원 급여 지급 프로그램을 만들자
+
+# # ex) - '박용택'의 pay값이 없기 때문에 오류발생
+# def setSalary(name, pay):
+#     print(f'{name}의 급여: {pay}원 지급')
+
+# setSalary('박찬호', 400)
+# setSalary('박세리', 600)
+# setSalary('박용택')     
+# #TypeError: setSalary() missing 1 required positional argument: 'pay'
+
+
+
+# # ex2) - pay의 기본값을 설정
+# def setSalary(name, pay = 250):
+#     print(f'{name}의 급여: {pay}원 지급')
+
+# setSalary('박찬호', 400)
+# setSalary('박세리', 600)
+# setSalary('박용택')         #'pay'부분의 값이 앖는 관계로 기본값 '250'을 사용함
+# # 박찬호의 급여: 400원 지급
+# # 박세리의 급여: 600원 지급
+# # 박용택의 급여: 250원 지급
+
+
+
+# # 데이터 반환(return)
+# # 데이터 반환이란, 함수는 실행이 끝난 후에 결과물(값)을 호출부로 반환할 수 있다
+# # 이때 사용하는 키워드가 'return'이다
+# # 덧셈 연산 함수를 만들어 결과를 출력하는 프로그램을 만들자
+
+# # ex) - 함수1개에 기능2개를 담은 상황
+# def addFunction(n1, n2):
+#     sum = n1 + n2
+#     print(f'결과 값: {sum}')
+
+# addFunction(10, 20)                 #결과 값: 30
+
+
+# # ex2) - return받아서 result로 받은 경우
+# def addFunction(n1, n2):
+#     sum = n1 + n2
+#     # print(f'결과 값: {sum}')
+#     return sum
+
+# result = addFunction(10, 20)        #return으로 받아도, 받지 않아도 그만
+# print(f'result: {result}')          #result: 30
+
+
+# # ex3) - 함수1개에 기능1개만
+# def printResult(value):
+#     print(f'value: {value}')
+
+# def addFunction(n1, n2):
+#     sum = n1 + n2
+#     # print(f'결과 값: {sum}')
+#     printResult(sum)
+#     return sum
+
+# result = addFunction(10, 20)        #return으로 받아도, 받지 않아도 그만
+# print(f'result: {result}')  
+
+
+# def fun1():
+#     print('11111111')
+#     print('22222222')
+#     return
+#     print('33333333')
+#     print('44444444')
+
+# fun1()
+# # 11111111
+# # 22222222
+
+# (retuen키워드는 데이터를 반환하는 것, 이외에도 'break'와 같이 실행을 
+# 종료/중단하고 탈출할 수 있다)
+
+
+# # quiz - 별탑 만들기
+# def incraseStart(limitStarCount):
+#     # print('*')
+#     # print('**')
+#     # print('***')
+#     # print('****')
+#     # print('*****')
+#     # print('******')
+#     # print('*******')
+    
+#     for n in range(1, 20):
+#         print('*' * n)
+#         if n == limitStarCount:
+#             break
+
+# incraseStart(5)
+
+
+
+# Toy 프로젝트
+'''
+처음 프로그램이 실행하면, 다음과 같은 메뉴를 출력한다
+메뉴: 1.회원가입   2.로그인   3.특정 회원정보 출력   4.모든 회원정보 출력   99.종료
+'1.회원가입'을 선택하면, 회원ID, 회원Email, 회원Phone 정보를 입력받아 회원가입을 진행한다
+'2.로그인'을 선택하면, 회원ID, 회원PW를 입력받아 로그인 '성공'또는 '실패'를 출력한다
+'3.특정 회원정보 출력'을 선택하면, 회원ID와 회원PW를 입력받아 일치하는 회원정보를 모두 출력한다
+'4.모든 회원정보 출력'을 선택하면, 가입되어있는 모든 회원정보를 출력한다
+'99.종료'를 선택하면, 프로그램을 종료한다
+
+이후에, 특정 회원의 회원ID와 회원PW를 입력받아 인증되면 회원정보를 수정하는 기능을 구현할 것
+'''
+
+# --> test2ex --> ex001 --> test008.py
+
