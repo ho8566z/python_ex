@@ -14,8 +14,15 @@ flag = True
 
 members = {}
 
-def access():
-    members[userId] = userPw
+def access(userId, userPw, userEmail, userPhone):
+    members[userId] = {
+        'pw': userPw,
+        'email': userEmail,
+        'phone': userPhone
+    }
+
+def accessSuccess():
+    print('회원가입 성공')
 
 def loginSuccess():
     print('로그인 성공')
@@ -23,45 +30,64 @@ def loginSuccess():
 def loginFail():
     print('로그인 실패')
 
-def targetSearchSuccess():
+def targetSearchSuccess(targetId):
     print(f'{targetId}: 회원정보 조회 성공')
 
-def targetSearchFail():
+def targetSearchFail(targetId):
     print(f'{targetId}: 회원정보 조회 실패')
 
-def printUserInfo():
-    print(f'회원ID: {members[userId]}, 회원PW: {userPw}, 회원Email: {userEmail}, 회원Phone: {userPhone}')
+def printUserInfo(userId):
+    info = members[userId]
+    print("="*50)
+    print(f'회원ID: {userId}, 회원PW: {info['pw']}, 회원Email: {info['email']}, 회원Phone: {info['phone']}')
+    print("="*50) 
 
-def reverseFlag():
-    flag = False
+def printAllInfo():
+    if not members:
+        print('미가입 회원입니다.')
+        return
 
-def programOff():
-    print('프로그램 종료')
+    print("="*50)
+    print('전체 회원 목록')
+    for userId, info in members.items():
+        print(f'ID: {userId}, Email: {info['email']}, Phone: {info['phone']}')
+    print("="*50)
 
+def editSuccess():
+    print(f'[{editId}] 인증성공, 새로운 회원정보를 입력하세요.')
+    members[editId]['pw'] = input('새로운 회원PW 입력: ')
+    members[editId]['email'] = input('새로운 회원Email 입력: ')
+    members[editId]['phone'] = input('새로운 회원Phone 입력: ')
+    print('회원정보 수정이 완료되었습니다.')
 
+def editFil():
+    print('인증 실패, 회원정보가 일치하지 않습니다.')
 
 while flag:
-    selectedMenuNum = int(input(f'메뉴: 1.회원가입   2.로그인   3.특정 회원정보 출력   4.모든 회원정보 출력   99.종료'))
+    print("="*50)
+    selectedMenuNum = int(input(f'메뉴: 1.회원가입   2.로그인   3.특정 회원정보 출력   4.모든 회원정보 출력   5.회원정보 수정   99.종료'))
+    print("="*50)
 
     if selectedMenuNum == 1:
         userId = input('ID 입력: ')
+        if userId in members:
+            print('중복 ID입니다.')
+            continue
         userPw = input('PW 입력: ')
         userEmail = input('Email 입력: ')
         userPhone = input('Phone 입력: ')
-        access()
+        access(userId, userPw, userEmail, userPhone)
+        accessSuccess()
 
 
     elif selectedMenuNum == 2:
         loginId = input('로그인ID 입력: ')
         loginPw = input('로그인PW 입력: ')
 
-        if loginId in members:
-            if members[userId] == userPw:
-                if loginPw == userPw:
-                    loginSuccess()
+        if loginId in members and members[loginId]['pw'] == loginPw:
+            loginSuccess()
 
         else:
-            reverseFlag()
             loginFail()
             
 
@@ -69,22 +95,32 @@ while flag:
         targetId = input('회원ID 입력: ')
         targetPw = input('회원PW 입력: ')
 
-        if targetId in members:
-            if members[userId] == userPw:
-                if targetPw == userPw:
-                    targetSearchSuccess()
-                    printUserInfo()
+        if targetId in members and members[targetId]['pw'] == targetPw:
+            targetSearchSuccess(targetId)
+            printUserInfo(targetId)
                 
         else:
-            reverseFlag()
-            targetSearchFail()
+            targetSearchFail(targetId)
         
     elif selectedMenuNum == 4:
-        targetSearchSuccess()
+        printAllInfo()
+
+    elif selectedMenuNum == 5:
+        editId = input('수정할 회원ID 입력: ')
+        editPw = input('회원PW 입력: ')
+
+        if editId in members and members[editId]['pw'] == editPw:
+            editSuccess()
+        
+        else:
+            editFil()
 
     elif selectedMenuNum == 99:
-        programOff()
-        reverseFlag()
+        print('프로그램을 종료합니다.')
+        flag = False
+
+    else:
+        print('메뉴를 다시 선택해주세요.')
 
 
 
