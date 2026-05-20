@@ -128,81 +128,130 @@
 #----------------------------2회차: clone코딩----------------------------
 #----------------------------------------------------------------------
 
-# Toy 프로젝트
-'''
-처음 프로그램이 실행하면, 다음과 같은 메뉴를 출력한다
-메뉴: 1.회원가입   2.로그인   3.특정 회원정보 출력   4.모든 회원정보 출력   
-5.회원정보 수정   99.종료
+# # Toy 프로젝트
+# '''
+# 처음 프로그램이 실행하면, 다음과 같은 메뉴를 출력한다
+# 메뉴: 1.회원가입   2.로그인   3.특정 회원정보 출력   4.모든 회원정보 출력   
+# 5.회원정보 수정   99.종료
 
-'1.회원가입'을 선택하면, 회원ID, 회원Email, 회원Phone 정보를 입력받아 회원가입을 진행한다
-'2.로그인'을 선택하면, 회원ID, 회원PW를 입력받아 로그인 '성공'또는 '실패'를 출력한다
---> 인증(Authentication), 인가(authorization)
-'3.특정 회원정보 출력'을 선택하면, 회원ID와 회원PW를 입력받아 일치하는 회원정보를 모두 출력한다
-'4.모든 회원정보 출력'을 선택하면, 가입되어있는 모든 회원정보를 출력한다
-'5.회원정보 수정'을 선택하면, 변경하려는 회원의 ID와 PW를 입력받아 인증하고, 회원정보를 수정한다
-'99.종료'를 선택하면, 프로그램
-'''
-
-
-members = {}
-
-def addMember(uId, uPw, uEmail, uPhone):
-    members[uId] = {
-        'pw': uPw, 
-        'email': uEmail,
-        'phone': uPhone
-    }
-
-def existId(uId):
-    return uId in members
-
-def authenticate(uId, uPw):
-    if existId and members[uId]['pw'] == uPw:
-        return True
-    return False
-
-def getMember(uId):
-    return members[uId]
-
-def getAllMember():
-    return members
-
-def updateMember(uId, uEmail, uPhone):
-    members[uId]['email'] = newEmail
-    members[uId]['phone'] = newPhone
+# '1.회원가입'을 선택하면, 회원ID, 회원Email, 회원Phone 정보를 입력받아 회원가입을 진행한다
+# '2.로그인'을 선택하면, 회원ID, 회원PW를 입력받아 로그인 '성공'또는 '실패'를 출력한다
+# --> 인증(Authentication), 인가(authorization)
+# '3.특정 회원정보 출력'을 선택하면, 회원ID와 회원PW를 입력받아 일치하는 회원정보를 모두 출력한다
+# '4.모든 회원정보 출력'을 선택하면, 가입되어있는 모든 회원정보를 출력한다
+# '5.회원정보 수정'을 선택하면, 변경하려는 회원의 ID와 PW를 입력받아 인증하고, 회원정보를 수정한다
+# '99.종료'를 선택하면, 프로그램
+# '''
 
 
-def runRegister():
-    print('----- 회원가입 -----')
-    uId = input('신규회원 ID 입력: ')
-    if existId(uId):
-        print('중복 ID입니다.')
-        return
+# members = {}
+
+# def addMember(uId, uPw, uEmail, uPhone):
+#     members[uId] = {
+#         'pw': uPw, 
+#         'email': uEmail,
+#         'phone': uPhone
+#     }
+
+# def existId(uId):
+#     return uId in members
+
+# def authenticate(uId, uPw):
+#     if existId and members[uId]['pw'] == uPw:
+#         return True
+#     return False
+
+# def getMember(uId):
+#     return members[uId]
+
+# def getAllMember():
+#     return members
+
+# def updateMember(uId, uEmail, uPhone):
+#     members[uId]['email'] = newEmail
+#     members[uId]['phone'] = newPhone
+
+
+# def runRegister():
+#     print('----- 회원가입 -----')
+#     uId = input('신규회원 ID 입력: ')
+#     if existId(uId):
+#         print('중복 ID입니다.')
+#         return
     
-    uPw = input('신규회원 PW: ')
-    uEmail = input('신규회원 Email: ')
-    uPhone = input('신규회원 Phone: ')
+#     uPw = input('신규회원 PW: ')
+#     uEmail = input('신규회원 Email: ')
+#     uPhone = input('신규회원 Phone: ')
 
-    addMember(uId, uPw, uEmail, uPhone)
-    print('회원가입 성공')
+#     addMember(uId, uPw, uEmail, uPhone)
+#     print('회원가입 성공')
 
-def runLogin():
-    print('----- 로그인 -----')
-    uId = input('로그인 ID: ')
-    uPw = input('로그인 PW: ')
+# def runLogin():
+#     print('----- 로그인 -----')
+#     uId = input('로그인 ID: ')
+#     uPw = input('로그인 PW: ')
 
-    if authenticate(uId, uPw):
-        print('로그인 성공')
-    else:
-        print('로그인 실패')
+#     if authenticate(uId, uPw):
+#         print('로그인 성공')
+#     else:
+#         print('로그인 실패')
 
-def runPrintMember():
-    print('----- 특정 회원정보 출력 -----')
-    uId = input('조회 ID: ')
-    uPw = input('조회 Pw: ')
+# def runPrintMember():
+#     print('----- 나의 회원정보 출력 -----')
+#     uId = input('조회 ID: ')
+#     uPw = input('조회 Pw: ')
 
-    if authenticate(uId, uPw):
-        info = getMember(uId)
-        print(f'[조회결과] ID: {uId}, Email: {info['email']}, Phone: {info['phone']}')
-    else:
-        print('인증 실패')
+#     if authenticate(uId, uPw):
+#         info = getMember(uId)
+#         print(f'[조회결과] ID: {uId}, Email: {info['email']}, Phone: {info['phone']}')
+#     else:
+#         print('인증 실패')
+
+# def runPrintAll():
+#     print('----- 모든 회원정보 출력 -----')
+#     allMembers = getAllMember()
+#     if not allMembers:
+#         print('가입된 회원이 없습니다.')
+#         return
+    
+#     for uId, info in allMembers.item():
+#         print(f'ID: {uId} | Email: {info['email']} | Phone: {info['phone']}')
+
+# def runUpdate():
+#     print('----- 나의 회원정보 수정 -----')
+#     uId = input('수정 ID: ')
+#     uPw = input('수정 PW: ')
+
+#     if authenticate(uId, uPw):
+#         newEmail = input('새로운 Email: ')
+#         newPhone = input('새로운 Phone: ')
+#         updateMember(uId, newEmail, newPhone)
+#         print('회원정보 수정 완료')
+    
+#     else:
+#         print('인증 실패: 수정 권한이 부족합니다.')
+
+# while True:
+#     print('-' * 40)
+#     print('메뉴: 1.회원가입   2.로그인   3.나의 회원정보 출력   4.모든 회원정보 출력   5.나의 회원정보 수정   99.종료')
+#     print('-' * 40)
+    
+#     menu = int(input('선택: '))
+
+#     if menu == 1:
+#         runRegister()
+#     elif menu == 2:
+#         runLogin()
+#     elif menu == 3:
+#         runPrintMember()
+#     elif menu == 4:
+#         runPrintAll()
+#     elif menu == 5:
+#         runUpdate()
+#     elif menu == 99:
+#         print('프로그램을 종료합니다.')
+#         break
+#     else:
+#         print('잘못된 선택입니다. 다시 선택해주세요.')
+
+
