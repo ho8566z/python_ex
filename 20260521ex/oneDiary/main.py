@@ -101,6 +101,7 @@ while flag:
         '''
         currentSignInedMemberID = session.signInedMemberid
         del member_db.memberDB[currentSignInedMemberID]
+        del diary_db.diaryDB[currentSignInedMemberID]
         
         print('member info delete')
         session.signInedMemberid = ''
@@ -150,3 +151,5 @@ while flag:
             for idx, diaryTxt in enumerate(deepcopiedDiaries):
                 print(f'({idx +1}): {diaryTxt}')
 
+    else:
+        print('선택한 번호는 없습니다. 다시 선택하세요.')
