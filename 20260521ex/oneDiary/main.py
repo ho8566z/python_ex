@@ -1,10 +1,12 @@
 from config_dir.dir import config
 from member import session
 from db import member_db
+from db import diary_db
 from member import member_dumy
+import copy
 
 if config.DEV_MOD:
-    member_dumy.memberDumyInit()
+    member_dumy.dumyInit()
     print(f'memberDB: {member_db.memberDB}')
 
 flag = True
@@ -14,10 +16,10 @@ while flag:
     menuNum = ''
     if session.signInedMemberid == '':
         # sign-out 일때
-        menuNum = int(input('1.sign-up   2.sign-in   99.end'))
+        menuNum = int(input('1.sign-up | 2.sign-in | 6.write | 7.read | 99.end'))
     else:
         # sign-in 일때
-        menuNum = int(input('3.modify   5.sign-out   4.delete   99.end'))
+        menuNum = int(input('3.modify | 5.sign-out | 4.delete | 6.write | 7.read | 99.end'))
 
 
     if menuNum == config.SIGN_UP:
@@ -38,6 +40,8 @@ while flag:
 
         if config.DEV_MOD:
             print(f'memberDB: {member_db.memberDB}')
+
+        diary_db.diaryDB[uId] = []
 
     elif menuNum == config.SIGN_IN:
         print('2.sign-in')
@@ -80,6 +84,7 @@ while flag:
         '''
         currentSignInedMemberID = session.signInedMemberid
         memberInfo = member_db.memberDB[currentSignInedMemberID]
+
         if config.DEV_MOD: print(f'memberInfo: {memberInfo}')
 
         memberInfo['uPw'] = uPw
@@ -99,6 +104,7 @@ while flag:
         
         print('member info delete')
         session.signInedMemberid = ''
+
         if config.DEV_MOD: print(f'member_db.memberDB: {member_db.memberDB}')
 
     elif menuNum == config.SYSTEM_OUT:
@@ -114,3 +120,33 @@ while flag:
         '''
         print('sign-out success')
         session.signInedMemberid = ''
+
+    elif menuNum == config.DIARY_WRITE:
+        print(f'6.write')
+
+        if session.signInedMemberid == '':
+            print('sorry, please sign-in')
+        else:
+            while True:
+                diaryTxt = input('10자 이하의 짧은 글을 입력하세요. ')
+                if len(diaryTxt) > 10:
+                    print(f'10자를 초과했습니다.({len(diaryTxt)})')
+                else:
+                    diary_db.diaryDB[session.signInedMemberid].append(diaryTxt)
+                    if config.DEV_MOD: print(f'diary_db.diaryDB: {diary_db.diaryDB}')
+                    break
+
+    elif menuNum == config.DIARY_READ:
+        print(f'7.read')
+
+        if session.signInedMemberid == '':
+            print('sorry, please sign-in')
+        else:
+            currentSignInedMemberID = session.signInedMemberid
+            myDiaries = diary_db.diaryDB[currentSignInedMemberID]
+
+            deepcopiedDiaries = copy.deepcopy(myDiaries)
+            deepcopiedDiaries.reverse()
+            for idx, diaryTxt in enumerate(deepcopiedDiaries):
+                print(f'({idx +1}): {diaryTxt}')
+
