@@ -6,7 +6,7 @@ mails = ['gildong@gmail.com', 'chanho@naver.com']
 phones = ['010-0001-0002', '010-0011-0022']
 
 
-def memberDumtInit():
+def memberDumyInit():
     for n in range(len(ids)):
         member_db.memberDB[ids[n]] = {
             'uId': ids[n],
