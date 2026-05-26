@@ -9,10 +9,13 @@ User : 가위
 컴퓨터 승리
 '''
 
+# temp.py : 모듈 파일
+
+
 import random
 
 userSelectedNums = []
-randNums=[]
+randNums = 0
 collects = []
 
 def setUSelecNumbers(ns):
@@ -36,16 +39,15 @@ def compareNumbers():
 
     collects = []
 
-    result = ""
+    user = userSelectedNums[0]
 
-    if randNums == userSelectedNums:
+    if randNums == user:
         result = '비겼습니다.'
-    elif (randNums==0 and userSelectedNums==2) or (randNums==1 and userSelectedNums==0) or (randNums==2 and userSelectedNums==1):
+    elif (randNums==0 and user==2) or (randNums==1 and user==0) or (randNums==2 and user==1):
         result = '졌습니다.'
-    elif (randNums==0 and userSelectedNums==1) or (randNums==1 and userSelectedNums==2) or (randNums==2 and userSelectedNums==0):
+    elif (randNums==0 and user==1) or (randNums==1 and user==2) or (randNums==2 and user==0):
         result = '이겼습니다.'
 
-    print(result)
     collects.append(result)
-
     return collects
+

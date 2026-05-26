@@ -9,15 +9,21 @@ User : 가위
 컴퓨터 승리
 '''
 
+# main.py : 실행 파일
+
+
 import temp
 
 selects = []
 
-selects.append(int(input('가위 바위 보를 선택하세요 0.가위   1.바위   2.보')))
+inputData = (int(input('가위 바위 보를 선택하세요 0.가위   1.바위   2.보')))
+selects.append(inputData)
+
 
 temp.setUSelecNumbers(selects)
 temp.setRNumbers()
 
 print(f'Computer 선택: {temp.getRNumbers()}')
-print(f'User 선택: {temp.getUSelecNumbers()}')
-print(f'가위바위보 결과: {temp.compareNumbers()}')
+print(f'User 선택: {temp.getUSelecNumbers()[0]}')
+print(f'가위바위보 결과: {temp.compareNumbers()[0]}')
+
