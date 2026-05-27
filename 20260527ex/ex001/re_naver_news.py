@@ -1,0 +1,118 @@
+import urllib.request       #파이썬에 기본으로 내장된 '웹 브라우저' 엔진 : 모듈
+import datetime             #날짜 및 시간 : 모듈
+import json                 #데이터 교환형식(프로그램끼리 데이터를 주고 받기 쉽게 만든 텍스트 형식) : 모듈
+import essential as es
+
+es.client_id                #naverClawler413 - client_id
+es.client_secret            #naverClawler413 - client_secret
+
+# NAVER에서 데이터를 가져오는 역할함수
+def getRequestUrl(url):                 #client에서 server로 'url'을 가져오기 위한 역할함수
+    req = urllib.request.Request(url)   #client에서 urllib을 통해 server로 데이터(url)을 요청하는 부분 
+    req.add_header('X-Naver-Client-Id', client_id)          #요청할 때, 필요한 정보를 채우는 부분(= id)
+    req.add_header('X-Naver-Client-Secret', client_secret)  #요청할 때, 필요한 정보를 채우는 부분(= pw)
+
+    #네이버 서버와 내가 만든 소프트웨어의 호환문제가 발생할 수 있기 때문에 예외처리
+    try:        #시도해라
+        response = urllib.request.urlopen(req) 
+        #요청한 데이터를 받아오는 부분(response(:응답) = urllib.request(:찾는 데이터 주소).urlopen(:데이터 받기 명령))
+        if response.getcode() == 200:   #데이터 요청에 대한 응답이 만약 '200'이라면 ->//
+            print(f'[{datetime.datetime.now()}] URL REQUEST SUCCESS')   #//-> 지금 시각과 '성공'메세지를 띄워라
+            # print(f'response data: {response.read().decode('utf-8')}')
+            #decode: 바이트(byte) 코드를 문자열(string)로 변환하는 것
+            return response.read().decode('utf-8')      
+            #응답받은 데이터를 읽기 위해 return해라(but, ".decode('utf-8')"를 통해 번역한 다음에)
+    except Exception as e:      #try해서 문제가 생긴다면,
+        print(f'[{datetime.datetime.now()}] Error: {e}')    #지금 시각과 해당되는 'error'가 무엇인지
+        return None                                         #error가 발생하면, return하지 마라
+    
+
+# NAVER에서 데이터 검색하는 역할함수
+def getNaverSearch(node, srcText, start, display):  
+    #naver에서 search해서 get해라(node(:어디서), srcText(:입력받은 검색어), start(:시작 위치), display(:가져올 데이터 개수))
+    base = 'https://openapi.naver.com/v1/search'    
+    #base(:위치) = 'https://openapi.naver.com(:주소)/v1(:출입구 번호)/search(:출입구 데스크 위치)'
+    node = f'/{node}.json'   #=>news.json
+    #위치 = f'/{데이터 위치}.json형식'(:base에서 받은 주소의 데이터를 json형식으로 받겠다는 과정을 정의하는)
+    parameters = f'?query={urllib.parse.quote(srcText)}&start={start}&display={display}'
+    #파라미터(parameters): 상세주문정보 / '?'을 기준으로 앞은 '도메인', 뒤는 '파라미터'
+    #?: 상세옵션 시작을 알리는 / query={}: quote()등의 함수 삽입하는
+    #quote(): 한글이나, 영어 등의 '자연어'를 컴퓨터용 암호(URL Safe)로 변경하는 함수(srcTexr를 암호로 번역)
+    #&: 연결고리(=and) / start={start}: 어디서 시작하는지 / display={display}: 몇 개의 데이터를 가져오는지
+
+    url = base + node + parameters  #url은 위치(base)와 주소(node), 그리고 상세주문정보(parameters)의 합
+    responseDecode = getRequestUrl(url)     #응답받은 데이터를 번역해 저장한 변수명 = server에서 url을 가져오기 위한 함수
+    
+    if responseDecode == None:              #만약, '응답받은 데이터 번역 변수'의 값이 ''(:없다)라면,
+        return None                         #값을 return하지 마라
+    else:                                   #그렇지 않으면,
+        return json.loads(responseDecode)   #json형식의 '응답받은 데이터 번역 변수'를 '로드'해서 return해라
+
+
+def getPostData(post, jsonResult, cnt):     #통신받은(:post) 데이터(:data)를 get해라
+    title = post['title']                   #'뉴스_제목'은 통신받은 데이터에서 'title'이다
+    description = post['description']       #'뉴스_설명'은 통신받은 데이터에서 'description'이다
+    org_link = post['originallink']         #'(원래의)뉴스사_주소'는 통신받은 데이터에서 'originallink'이다
+    link = post['link']                     #'naver_주소'는 통신받은 데이터에서 'link'이다
+    pDate = datetime.datetime.strptime(post['pubDate'],  '%a, %d %b %Y %H:%M:%S +0900')
+    #pData(:python데이터) = datetime(:날짜 모듈).datetime(:시간 함수).strptime(:문자열 데이터를 시간 객체로 변경하는)
+    #pubDate: naver에 있는 출판된 데이터, (+)  %요일, %일 %월 %년도 %시:%분:%초 +0900(:대한민국 시간대) (%:구분자)
+    pDate = pDate.strftime('%Y-%m-%d %H:%M:%S')
+    #pData(:python데이터) = 기존의 pData(:python데이터)에 '날짜'에 해당하는 데이터를 추가해서
+
+
+    jsonResult.append({                 #jsonResult에 추가해라, {}에 담긴/담길 데이터를
+        'cnt': cnt,                     #데이터 응답받을 횟수
+        'title': title,                 #응답받은 데이터의 이름(뉴스 제목)
+        'description': description,     #응답받은 데이터의 설명(뉴스 내용)
+        'org_link': org_link,           #응답받은 데이터의 뉴스사 주소(원래 주소)
+        'link': link,                   #응답받은 데이터의 브라우저 주소(naver 주소)
+        'pData': pDate                  #데이터를 응답받을 때의 날짜 및 시간 정보
+    })
+
+
+def main():         #실행 파일 대신에
+    node = 'news'   #'크롤링'하는 대상을 지정
+    srcText = input('검색어 입력: ')    #검색하고 싶은 Text입력받아 srcText에 할당하는
+    cnt = 0         #데이터를 몇번 응답 받을건지에 대한 count함수 값을 0으로
+    jsonResult = [] 
+    #json: 데이터 교환형식(프로그램끼리 데이터를 주고 받기 쉽게 만든 텍스트 형식)
+    #jsonResult: json형식으로 응답받은 데이터를 정의하기 직전까지의 것을 []에 딤을 수 있도록
+
+    jsonResponse = getNaverSearch(node, srcText, 1, 100)
+    #json형식으로 응답받은 데이터에, naver에서 search해서 get한 데이터(위치, 검색어, 시작위치, 가져올 데이터 개수)를 할당해라
+    
+    # print(f'jsonResponse: {jsonResponse}')
+    # print(f'jsonResponse total: {jsonResponse['total']}')       #jsonResponse total: 3783987
+    # print(f'jsonResponse items 0: {jsonResponse['items'][0]}')
+    # print(f'jsonResponse items 0 title: {jsonResponse['items'][0]['title']}')
+    # print(f'jsonResponse items 0 description: {jsonResponse['items'][0]['description']}')
+
+    while jsonResponse != None and jsonResponse['display'] != 0:
+        #json형식으로 응답받은 데이터가 None과 같지 않을때 and json형식으로 응답받은 데이터의 개수가 0이 아닐때
+        for post in jsonResponse['items']:
+            #통신받은 데이터가 json형식으로 응답받은 데이터의 목록을 찾는(겹치는) 동안에
+            cnt += 1    #데이터를 몇번 응답 받을건지에 대한 count함수를 1개씩 추가해라
+            getPostData(post, jsonResult, cnt)
+            #통신받은 데이터를 get해라(post(:통신받은 개별 데이터 1개), 
+            # jsonResult(:응답받은 json형식으로 정의하기 직전의 것), 
+            # cnt(데이터를 몇번 응답 받을건지에 대한 count함수:))
+
+        jsonResponse = getNaverSearch(node, srcText, jsonResponse['start'] + jsonResponse['display'], 100)
+        #json형식으로 응답받은 데이터는 naver에서 search해서 get한 데이터(위치, 검색어, 
+        # 시작위치[이전 시작위치] + 이전에 가져온 데이터 개수(=1+100 = 101부터 시작위치), 가져올 데이터 개수)를 재할당해라
+
+    #파일로 저장(날씨_naver_news.json)
+    with open(f'{srcText}_naver_{node}. json', 'w', encoding='utf8') as f:
+        #응답받은 데이터를 다음 형식에 맞게 작성해라, 파일명({srcText: 검색어}_naver_{node: 위치})이고, 
+        # json형식으로 "encoding='utf8'"를 통해 번역한 다음에, 별명은 'f'로
+        jsonFile = json.dumps(jsonResult, indent=4, sort_keys=True,  ensure_ascii=False)
+        #json형식의 file은 json(:json형식으로).dumps(:한번에) 
+        # (jsonResult(:json형식으로 응답받은 데이터를 정의하기 직전까지의 것을), indent=4(:4칸씩 들여서 쓰고), 
+        # sort_keys=True(:정렬 순서를 알파벳 순서로),  ensure_ascii=False(:한글은 제외하고))
+        f.write(jsonFile)   #'f'라는 별명을 지닌 파일에 '작성해라', json형식의 file을
+
+
+if __name__ == '__main__':      #만약에, 이 파일(__name__)이 '주인공('__main__')'일때만 ->//
+    main()                      #//-> main(): 함수를 실행해라
+

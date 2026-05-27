@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>네이버 뉴스 검색</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            margin: 40px;
+        }
+
+        h1{
+            color: green;
+        }
+
+        .news-box{
+            border:1px solid #ccc;
+            padding:15px;
+            margin-bottom:20px;
+            border-radius:10px;
+        }
+
+        a{
+            color:blue;
+            text-decoration:none;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <h1>이윤호의 네이버 뉴스 검색</h1>
+
+    <form method="POST">
+
+        <input type="text"
+               name="keyword"
+               placeholder="검색어 입력"
+               required>
+
+        <button type="submit">검색</button>
+
+    </form>
+
+    <hr>
+
+    {% if result %}
+
+        <h2>"{{ keyword }}" 검색 결과</h2>
+
+        {% for news in result %}
+
+        <div class="news-box">
+
+            <h3>{{ news.title|safe }}</h3>
+
+            <p>{{ news.description|safe }}</p>
+
+            <p>
+                <a href="{{ news.link }}"
+                   target="_blank">
+                   뉴스 보기
+                </a>
+            </p>
+
+            <small>{{ news.pDate }}</small>
+
+        </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+</body>
+</html>
