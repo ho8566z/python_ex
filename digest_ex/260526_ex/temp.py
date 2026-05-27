@@ -1,0 +1,57 @@
+# quiz) - 가위, 바위, 보 게임
+'''
+컴퓨터와 함께하는 가위 바위 보 게임을 만들자, 난수를 이용해 게임을 진행하고 결과를 출력한다
+
+가위 바위 보를 선택하세요.
+0.가위 1.바위 2.보 :: 0
+Com : 바위
+User : 가위
+컴퓨터 승리
+'''
+
+# temp.py : 모듈 파일
+
+
+import random       #random(랜덤) 모듈을 소환(import)한다
+
+userSelectedNums = []   #사용자가 선택한 정수를 담는 []리스트
+randNums = 0            #com이 발생시킬 난수의 수를 0으로 정리한 것
+collects = []           #user의 정수와 com의 난수를 비교하는 []리스트
+
+def setUSelecNumbers(ns):       #함수: set(:설정한다)U(:user)Selec(:선택)Numbers(:정수를)(ns(:매개변수))
+    global userSelectedNums     #전역변수 userSelectedNums를 지역변수로서 사용 가능하도록
+    userSelectedNums = ns       #userSelectedNums에 매개변수ns를 할당받는
+
+def getUSelecNumbers():         #함수: get(:얻는다)U(:user)Selec(:선택)Numbers(:정수를)
+    return userSelectedNums     #userSelectedNums를 return한다
+
+def setRNumbers():              #함수: set(:설정한다)R(:랜덤)Numbers(:난수를)
+    global randNums             #전역변수 randNums를 지역변수로서 사용 가능하도록
+    randNums = random.randrange(3)      #randNums에 랜덤.랜덤범위(3까지)를 할당한다
+
+def getRNumbers():              #함수: get(:얻는다)R(:랜덤)Numbers(:난수를)
+    return randNums             #getRNumbers를 return한다
+
+def compareNumbers():           #함수: compare(:비교한다)Numbers(:정수와 난수를)
+    global userSelectedNums     #전역변수 userSelectedNums를 지역변수로서 사용 가능하도록
+    global randNums             #전역변수 randNums를 지역변수로서 사용 가능하도록
+    global collects             #전역변수 collects를 지역변수로서 사용 가능하도록
+
+    collects = []               #user의 정수와 com의 난수를 비교하는 []리스트를 다시 비우기 위해 선언
+
+    user = userSelectedNums[0]  #'user'라는 변수명에 사용자가 선택한 정수를 담는 []리스트를 할당한다
+
+    if randNums == user:        #만약, com의 랜덤 난수가 사용자가 선택한 정수와 같다면,
+        result = '비겼습니다.'      #'비겼다'는 값을 결과로 받아라
+    elif (randNums==0 and user==2) or (randNums==1 and user==0) or (randNums==2 and user==1):
+        #만약 2번조건이라면, (com난수가 0일때, and user정수가 2라면) or (com난수가 1일때, and user정수가 0라면)
+        # or (com난수가 2일때, and user정수가 1라면)
+        result = '졌습니다.'        #'졌다'는 값을 결과로 받아라
+    elif (randNums==0 and user==1) or (randNums==1 and user==2) or (randNums==2 and user==0):
+        #만약 3번조건이라면, (com난수가 0일때, and user정수가 1라면) or (com난수가 1일때, and user정수가 2라면)
+        # or (com난수가 2일때, and user정수가 0라면)
+        result = '이겼습니다.'      #'이겼다'는 값을 결과로 받아라
+
+    collects.append(result)     #난수와 정수를 비교하는 []에 추가해라, (위의 if~elif문의 결과 값을)
+    return collects             #if~elif문의 결과 값을 추가한 난수와 정수를 비교하는 []를 return해라
+

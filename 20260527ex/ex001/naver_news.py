@@ -9,8 +9,8 @@ es.client_secret
 # NAVER에서 데이터를 가져오는 역할함수
 def getRequestUrl(url):
     req = urllib.request.Request(url)
-    req.add_header('X-Naver-Client-Id', client_id)
-    req.add_header('X-Naver-Client-Secret', client_secret)
+    req.add_header('X-Naver-Client-Id', es.client_id)
+    req.add_header('X-Naver-Client-Secret', es.client_secret)
 
     #네이버 서버와 내가 만든 소프트웨어의 호환문제가 발생할 수 있기 때문에 예외처리
     try:

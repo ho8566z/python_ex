@@ -1,7 +1,7 @@
 import urllib.request       #파이썬에 기본으로 내장된 '웹 브라우저' 엔진 : 모듈
 import datetime             #날짜 및 시간 : 모듈
 import json                 #데이터 교환형식(프로그램끼리 데이터를 주고 받기 쉽게 만든 텍스트 형식) : 모듈
-import essential as es
+import essential as es      #client의 id, secret에 해당하는 정보를 모듈해서 '.gitinore'한 것
 
 es.client_id                #naverClawler413 - client_id
 es.client_secret            #naverClawler413 - client_secret
@@ -9,8 +9,8 @@ es.client_secret            #naverClawler413 - client_secret
 # NAVER에서 데이터를 가져오는 역할함수
 def getRequestUrl(url):                 #client에서 server로 'url'을 가져오기 위한 역할함수
     req = urllib.request.Request(url)   #client에서 urllib을 통해 server로 데이터(url)을 요청하는 부분 
-    req.add_header('X-Naver-Client-Id', client_id)          #요청할 때, 필요한 정보를 채우는 부분(= id)
-    req.add_header('X-Naver-Client-Secret', client_secret)  #요청할 때, 필요한 정보를 채우는 부분(= pw)
+    req.add_header('X-Naver-Client-Id', es.client_id)          #요청할 때, 필요한 정보를 채우는 부분(= id)
+    req.add_header('X-Naver-Client-Secret', es.client_secret)  #요청할 때, 필요한 정보를 채우는 부분(= pw)
 
     #네이버 서버와 내가 만든 소프트웨어의 호환문제가 발생할 수 있기 때문에 예외처리
     try:        #시도해라
