@@ -1,45 +1,33 @@
 import os
-import sys
 import json
 
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+if __name__ == "__main__":
+    import sys
 
-from db import memberAccountDb as memberDb
-from db import backAccountDb as bankDb
-from db import memoDb as memoDb
-from db import todoListDb as todoDb
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    project_root = os.path.dirname(current_dir)
+    sys.path.append(project_root)
+
+from db import dbManager
 from db import config
 
-STORAGE_PATH = "C:/pjh/python/dashborad-toy/db/storage"
-
-PATH_MEMBER = f"{STORAGE_PATH}/member.json"
-PATH_BANK = f"{STORAGE_PATH}/bank.json"
-PATH_MEMO = f"{STORAGE_PATH}/memo.json"
-PATH_TODO = f"{STORAGE_PATH}/todo.json"
+RESOURCE_PATH = f"{os.getcwd()}\\resources"
+PATH_MEMBER = f"{RESOURCE_PATH}\\member.json"
+PATH_BANK = f"{RESOURCE_PATH}\\bank.json"
+PATH_MEMO = f"{RESOURCE_PATH}\\memo.json"
+PATH_TODO = f"{RESOURCE_PATH}\\todo.json"
 
 
 def saveAtFile(path, data):
-    # 암호화?
     with open(f"{path}", "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
 
-# TODO: 데이터가 많아질 때를 대비해 캐싱해야함
-# FIXME: storage에 없는 정보만 저장 (새로 생긴 데이터, 수정된 데이터, 원래 있었다가 삭제된거?)
-def saveMemberAccount():
-    saveAtFile(PATH_MEMBER, memberDb.memberAccountDb)
-
-
-def saveBankAccount():
-    saveAtFile(PATH_BANK, bankDb.bankAccountDb)
-
-
-def saveMemo():
-    saveAtFile(PATH_MEMO, memoDb.memoDb)
-
-
-def saveTodoList():
-    saveAtFile(PATH_TODO, todoDb.todoListDb)
+def dbSaveAllAtFile():
+    saveAtFile(PATH_MEMBER, dbManager.members)
+    saveAtFile(PATH_BANK, dbManager.bankAccounts)
+    saveAtFile(PATH_MEMO, dbManager.memos)
+    saveAtFile(PATH_TODO, dbManager.todoLists)
 
 
 def loadFromFile(path, hook=None):
@@ -57,11 +45,11 @@ def restoreBankLog(dct):
     return dct
 
 
-def startCaching():
-    memberDb.memberAccountDb = loadFromFile(PATH_MEMBER)
-    bankDb.bankAccountDb = loadFromFile(PATH_BANK, restoreBankLog)
-    memoDb.memoDb = loadFromFile(PATH_MEMO)
-    todoDb.todoListDb = loadFromFile(PATH_TODO)
+def dbLoadAllFromFile():
+    dbManager.members = loadFromFile(PATH_MEMBER)
+    dbManager.bankAccounts = loadFromFile(PATH_BANK, restoreBankLog)
+    dbManager.memos = loadFromFile(PATH_MEMO)
+    dbManager.todoLists = loadFromFile(PATH_TODO)
 
 
 # if __name__ == "__main__":
@@ -70,21 +58,20 @@ def startCaching():
 #         print(dct)
 
 #     def printAll():
-#         printInfo(memberDb.memberAccountDb)
-#         printInfo(bankDb.bankAccountDb)
-#         printInfo(memoDb.memoDb)
-#         printInfo(todoDb.todoListDb)
+#         printInfo(dbManager.members)
+#         printInfo(dbManager.bankAccounts)
+#         printInfo(dbManager.memos)
+#         printInfo(dbManager.todoLists)
 
-#     saveBankAccount()
-#     saveMemberAccount()
-#     saveMemo()
-#     saveTodoList()
+#     dbLoadAllFromFile()
+#     printAll()
 
-#     print("=" * 100)
+#     print("=" * 200)
 
-#     memberDb.memberAccountDb = None
-#     bankDb.bankAccountDb = None
-#     memoDb.memoDb = None
-#     todoDb.todoListDb = None
+#     dbManager.members = None
+#     dbManager.bankAccounts = None
+#     dbManager.memos = None
+#     dbManager.todoLists = None
 
-#     startCaching()
+#     # dbSaveAllAtFile()
+#     printAll()
