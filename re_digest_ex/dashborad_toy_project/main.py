@@ -10,7 +10,7 @@ OPT_SIGN_UP = "1"
 OPT_SIGN_IN = "2"
 OPT_SIGN_OUT = "3"
 OPT_MODIFY = "4"
-OPT_BANK = "5"
+OPT_BANK = "5"          #옵션_은행(서비스)는 '5'이다
 OPT_MEMO = "6"
 OPT_TODO = "7"
 
@@ -30,7 +30,7 @@ def notImplemented():
 signInedActions = {
     OPT_SIGN_OUT: memberService.signOut,
     OPT_MODIFY: notImplemented,
-    OPT_BANK: bankAccount.startLoop,
+    OPT_BANK: bankAccount.startLoop,        #옵션_은행(서비스)가 선택되면, '함수: start한다, loop(루프)를'이 실행된다
     OPT_MEMO: memo.memoLoop,
     OPT_TODO: todolist.startLoop,
 }
