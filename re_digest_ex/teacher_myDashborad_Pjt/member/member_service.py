@@ -123,9 +123,7 @@ class MemberSerive:
 
     def run(self):
         flag = True
-        # while flag:
         while flag:
-            # if session.signInedMemberId == '':
             if session.getSignInedMemberId() == '':
                 menuNum = int(input('1.SIGN-UP    2.SIGN-IN    99.SERVICE-OUT :  '))
             else:
