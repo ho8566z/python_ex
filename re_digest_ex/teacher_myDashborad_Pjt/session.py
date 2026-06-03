@@ -1,4 +1,4 @@
-signInedMemberId = ''
+signInedMemberId = '001'
 
 # setter
 def setSignInedMemberId(mId=''):

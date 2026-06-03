@@ -50,74 +50,117 @@ class MemoService:
         
         return False
     
+##============================================================================================================#
+    
+    def replaceMemo(self):
+        self.memos = self.load_memos()
+        self.myMemos = self.memos[session.getSignInedMemberId()]
 
+        
+    def checkedDev(self):
+        if root_config.DEV_MOD:
+            print(f'self.load_memos: {self.load_memos()}')
+
+
+    def re_saveMemo(self):
+        self.save_memos(self.memos)
+
+
+    def inputMemoWrite(self):        
+        newMemo = input('Write new memo :  ')
+
+        self.replaceMemo()
+        self.myMemos.insert(0, newMemo)
+
+        self.re_saveMemo()
+        print('WRITE SUCCESS!!')
+        
+        self.checkedDev()
+            
+            
+    def memoWrite(self):
+        self.inputMemoWrite()
+					
+##============================================================================================================#	  
+
+    def memoReading(self):
+        self.replaceMemo()
+        for idx, memo in enumerate(self.myMemos):
+            print('==================================================================================\n')
+            print(f'[{idx+1}] {memo}')
+                        
+
+    def memoRead(self):
+        self.memoReading()
+
+##============================================================================================================#	  
+
+    def inputMemoUpdate(self):
+        self.replaceMemo()
+        for idx, memo in enumerate(self.myMemos):
+            print('==================================================================================\n')
+            print(f'[{idx+1}] {memo}')
+
+        selectedNumber = int(input('Please select the number to modify :  '))
+        memo = input('Edit memo :  ')
+        self.myMemos[selectedNumber-1] = memo
+
+        self.re_saveMemo()
+        print('MODIFY SUCCESS!!')
+
+        self.checkedDev()
+                        
+                        
+    def memoUpdate(self):
+        self.inputMemoUpdate()
+
+##============================================================================================================#	  
+
+    def selectedMemoDelete(self):
+        self.replaceMemo()
+        for idx, memo in enumerate(self.myMemos):
+            print(f'[{idx+1}] {memo}')
+
+        selectedNumber = int(input('Please select the number to delete :  '))
+        self.myMemos.pop(selectedNumber-1)
+        self.re_saveMemo()
+
+        self.checkedDev()
+            
+
+    def memoDelete(self):
+        self.selectedMemoDelete()
+        
+##============================================================================================================#	  				
     def run(self):
 
-        if session.getSignInedMemberId() == '':
-            print('Please SIGN-IN!!')
-            return
-        
-        flag = True
-        while flag:
-
-            if not self.isMyMemos():
-                self.memos[session.getSignInedMemberId()] = []
-                self.save_memos(self.memos)
+            if session.getSignInedMemberId() == '':
+                print('Please SIGN-IN!!')
+                return
             
-            menuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    99.SERVICE-OUT :  '))
-            
-            if menuNum == memo_config.WRITE:
-                newMemo = input('Write new memo :  ')
+            flag = True
+            while flag:
 
-                self.memos = self.load_memos()
-                myMemos = self.memos[session.getSignInedMemberId()]
-                myMemos.insert(0, newMemo)
-
-                self.save_memos(self.memos)
-                print('WRITE SUCCESS!!')
-
-                if root_config.DEV_MOD:
-                    print(f'self.load_memos: {self.load_memos()}')
-
-            elif menuNum == memo_config.READ:
-                self.memos = self.load_memos()      # dic
-                myMemos = self.memos[session.getSignInedMemberId()] # list
-                for idx, memo in enumerate(myMemos):
-                    print('==================================================================================\n')
-                    print(f'[{idx+1}] {memo}')
-
-            elif menuNum == memo_config.UPDATE:
-                self.memos = self.load_memos()      # dic
-                myMemos = self.memos[session.getSignInedMemberId()] # list
-                for idx, memo in enumerate(myMemos):
-                    print('==================================================================================\n')
-                    print(f'[{idx+1}] {memo}')
-
-                selectedNumber = int(input('Please select the number to modify :  '))
-                memo = input('Edit memo :  ')
-                myMemos[selectedNumber-1] = memo
-
-                self.save_memos(self.memos)
-                print('MODIFY SUCCESS!!')
-
-                if root_config.DEV_MOD:
-                    print(f'self.load_memos: {self.load_memos()}')
-
-            elif menuNum == memo_config.DELETE:
-                self.memos = self.load_memos()      # dic
-                myMemos = self.memos[session.getSignInedMemberId()] # list
-                for idx, memo in enumerate(myMemos):
-                    print(f'[{idx+1}] {memo}')
-
-                selectedNumber = int(input('Please select the number to delete :  '))
-                myMemos.pop(selectedNumber-1)
-                self.save_memos(self.memos)
-
-                if root_config.DEV_MOD:
-                    print(f'self.load_memos: {self.load_memos()}')
+                if not self.isMyMemos():
+                    self.memos[session.getSignInedMemberId()] = []
+                    self.re_saveMemo()
                 
-            elif menuNum == memo_config.SERVICE_OUT:
-                flag = False
+                menuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    99.SERVICE-OUT :  '))
+                
+                if menuNum == memo_config.WRITE:
+                    self.memoWrite()
+                    
+                elif menuNum == memo_config.READ:
+                    self.memoRead()
+                    
+                elif menuNum == memo_config.UPDATE:
+                    self.memoUpdate()
+                    
+                elif menuNum == memo_config.DELETE:
+                    self.memoDelete()
+                    
+                elif menuNum == memo_config.SERVICE_OUT:
+                    flag = False
 
 
 if __name__ == '__main__':

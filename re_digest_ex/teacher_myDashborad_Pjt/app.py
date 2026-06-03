@@ -9,7 +9,7 @@ def main():
     while flag:
         menuNum = int(input('1.MEMBER    2.BANK    3.MEMO    4.TODO    99.SYSTEM-OUT :  '))
         if menuNum == config.MEMBER_SERVICE:
-            member_service.MemberSerive().run()
+            member_service.MemberService().run()
 
         elif menuNum == config.BANK_SERVICE:
             bank_service.BankService().run()

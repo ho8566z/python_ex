@@ -51,114 +51,163 @@ class TodoService:
         return False
 
 
+##============================================================================================================#
+			
+    def replaceTodo(self):
+        self.todos = self.load_todos()
+        self.myTodos = self.todos[session.getSignInedMemberId()]
+                    
+
+    def checkedDev(self):                
+        if root_config.DEV_MOD:
+            print(f'self.load_todos: {self.load_todos()}')
+            
+
+    def re_saveTodo(self):
+        self.save_todos(self.todos)
+
+
+    def inputTodoWirte(self):
+        self.replaceTodo()
+        tText = input('Input new todo txt :  ')
+        tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
+        
+        self.todo = {
+            'tText': tText,
+            'tExpDate': tExpDate,
+            'tRegDate': util_time.getCurrentDateTime(),
+            'tModDate': util_time.getCurrentDateTime(),
+            'tComplete': False
+        }
+        
+        self.myTodos.insert(0, self.todo)
+        self.re_saveTodo()
+        print('WRITE SUCCESS!!')
+
+        self.checkedDev()
+                        
+            
+    def todoWirtwe(self):
+        self.inputTodoWirte()
+
+##============================================================================================================#
+
+    def todoReading(self):
+        self.replaceTodo()
+        for idx, myTodo in enumerate(myTodo):
+            print('==================================================================================\n')
+            print(f'[{idx+1}]')
+            print(f"TEST: [{myTodo['tText']}]")
+            print(f"EXPIRATIONDATE: [{myTodo['tExpDate']}]")
+            print(f"REGISTER DATE: [{myTodo['tRegDate']}]")
+            print(f"MODIFY DATE: [{myTodo['tModDate']}]")
+            print(f"COMPLETE: [{myTodo['tComplete']}]")
+                        
+                        
+    def todoRead(self):
+        self.todoReading()
+
+##============================================================================================================#
+
+    def inputTodoUpdate(self):
+        self.replaceTodo()
+        for idx, myTodo in enumerate(self.myTodos):
+            print('==================================================================================\n')
+            print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
+            print('----------------------------------------------------------------------------------\n')
+
+        todoNumber = int(input('Enter the todo number :  '))
+        tText = input('Input todo txt :  ')
+        tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
+
+        self.todo = {
+            'tText': tText,
+            'tExpDate': tExpDate,
+            'tRegDate': self.myTodos[todoNumber-1]['tRegDate'],
+            'tModDate': util_time.getCurrentDateTime(),
+            'tComplete': self.myTodos[todoNumber-1]['tComplete']
+        }
+
+        self.myTodos[todoNumber-1] = self.todo
+        self.re_saveTodo()
+        print('UPDATE SUCCESS!!')
+
+        self.checkedDev()
+                        
+                        
+    def todoUpdate(self):
+        self.inputTodoUpdate()
+
+##============================================================================================================#
+
+    def selectedTodoDelete(self):
+        self.replaceTodo()
+        for idx, myTodo in enumerate(self.myTodos):
+            print('==================================================================================\n')
+            print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
+            print('----------------------------------------------------------------------------------\n')
+
+        todoNumber = int(input('Enter the todo number :  '))
+        self.myTodos.pop(todoNumber-1)
+        self.re_saveTodo()
+
+        self.checkedDev()
+                        
+                        
+    def todoDelete(self):
+        self.selectedTodoDelete()
+
+##============================================================================================================#
+
+    def checkingTodo(self):
+        self.replaceTodo()
+        for idx, myTodo in enumerate(self.myTodos):
+            print('==================================================================================\n')
+            print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
+            print('----------------------------------------------------------------------------------\n')
+
+        todoNumber = int(input('Enter the todo number :  '))
+        self.myTodos[todoNumber-1]['tComplete'] = not self.myTodos[todoNumber-1]['tComplete']
+        self.re_saveTodo()
+        print('COMPLETE CHANGE SUCCESS!!')
+
+        self.checkedDev()
+                        
+        
+    def completeChange(self):
+        self.checkingTodo()
+                
+##============================================================================================================#
     def run(self):
 
-        if session.getSignInedMemberId() == '':
-            print('Please SIGN-IN!!')
-            return
-        
-        flag = True
-        while flag:
-            if not self.isMyTodos():
-                self.todos[session.getSignInedMemberId()] = []
-                self.save_todos(self.todos)
+            if session.getSignInedMemberId() == '':
+                print('Please SIGN-IN!!')
+                return
+            
+            flag = True
+            while flag:
+                if not self.isMyTodos():
+                    self.todos[session.getSignInedMemberId()] = []
+                    self.re_saveTodo()
 
-            memuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    5.COMPLETE-CHANGE    99.SERVICE-OUT :  '))
-            if memuNum == todo_config.WRITE:
-                self.todos = self.load_todos()
-                myTodos = self.todos[session.getSignInedMemberId()]
-                
-                tText = input('Input new todo txt :  ')
-                tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
-                
-                todo = {
-                    'tText': tText,
-                    'tExpDate': tExpDate,
-                    'tRegDate': util_time.getCurrentDateTime(),
-                    'tModDate': util_time.getCurrentDateTime(),
-                    'tComplete': False
-                }
-
-                myTodos.insert(0, todo)
-                self.save_todos(self.todos)
-                print('WRITE SUCCESS!!')
-
-                if root_config.DEV_MOD:
-                    print(f'self.load_todos: {self.load_todos()}')
-
-            elif memuNum == todo_config.READ:
-                self.todos = self.load_todos()      # dic
-                myTodo = self.todos[session.getSignInedMemberId()] # list
-                for idx, myTodo in enumerate(myTodo):
-                    print('==================================================================================\n')
-                    print(f'[{idx+1}]')
-                    print(f"TEST: [{myTodo['tText']}]")
-                    print(f"EXPIRATIONDATE: [{myTodo['tExpDate']}]")
-                    print(f"REGISTER DATE: [{myTodo['tRegDate']}]")
-                    print(f"MODIFY DATE: [{myTodo['tModDate']}]")
-                    print(f"COMPLETE: [{myTodo['tComplete']}]")
-
-            elif memuNum == todo_config.UPDATE:
-                self.todos = self.load_todos()
-                myTodos = self.todos[session.getSignInedMemberId()]
-                for idx, myTodo in enumerate(myTodos):
-                    print('==================================================================================\n')
-                    print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
-                    print('----------------------------------------------------------------------------------\n')
-
-                todoNumber = int(input('Enter the todo number :  '))
-                tText = input('Input todo txt :  ')
-                tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
-
-                todo = {
-                    'tText': tText,
-                    'tExpDate': tExpDate,
-                    'tRegDate': myTodos[todoNumber-1]['tRegDate'],
-                    'tModDate': util_time.getCurrentDateTime(),
-                    'tComplete': myTodos[todoNumber-1]['tComplete']
-                }
-
-                myTodos[todoNumber-1] = todo
-                self.save_todos(self.todos)
-                print('UPDATE SUCCESS!!')
-
-                if root_config.DEV_MOD:
-                    print(f'self.load_todos: {self.load_todos()}')
-
-            elif memuNum == todo_config.DELETE:
-                self.todos = self.load_todos()
-                myTodos = self.todos[session.getSignInedMemberId()]
-                for idx, myTodo in enumerate(myTodos):
-                    print('==================================================================================\n')
-                    print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
-                    print('----------------------------------------------------------------------------------\n')
-
-                todoNumber = int(input('Enter the todo number :  '))
-                myTodos.pop(todoNumber-1)
-                # DEL버전: del myTodos[todoNumber-1]
-                self.save_todos(self.todos)
-
-                if root_config.DEV_MOD:
-                    print(f'self.load_todos: {self.load_todos()}')
-
-            elif memuNum == todo_config.COMPLETE_CHANGE:
-                self.todos = self.load_todos()
-                myTodos = self.todos[session.getSignInedMemberId()]
-                for idx, myTodo in enumerate(myTodos):
-                    print('==================================================================================\n')
-                    print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
-                    print('----------------------------------------------------------------------------------\n')
-
-                todoNumber = int(input('Enter the todo number :  '))
-                myTodos[todoNumber-1]['tComplete'] = not myTodos[todoNumber-1]['tComplete']
-                self.save_todos(self.todos)
-                print('COMPLETE CHANGE SUCCESS!!')
-
-                if root_config.DEV_MOD:
-                    print(f'self.load_todos: {self.load_todos()}')
-                
-            elif memuNum == todo_config.SERVICE_OUT:
-                flag = False
+                memuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    5.COMPLETE-CHANGE    99.SERVICE-OUT :  '))
+                if memuNum == todo_config.WRITE:
+                    self.todoWirtwe()
+                    
+                elif memuNum == todo_config.READ:
+                    self.todoRead()
+                    
+                elif memuNum == todo_config.UPDATE:
+                    self.todoUpdate()
+                    
+                elif memuNum == todo_config.DELETE:
+                    self.todoDelete()
+                    
+                elif memuNum == todo_config.COMPLETE_CHANGE:
+                    self.completeChange()
+                    
+                elif memuNum == todo_config.SERVICE_OUT:
+                    flag = False
 
 
 if __name__ == '__main__':

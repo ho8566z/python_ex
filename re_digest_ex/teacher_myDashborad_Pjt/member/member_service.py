@@ -5,10 +5,14 @@ import os
 import json
 import session
 
-class MemberSerive:
+class MemberService:
     def __init__(self):
         self.members = {}
         self.init_database()
+
+
+    def re_saveMembers(self):
+        self.save_members(self.members)
 
 
     # 회원 가입 기능
@@ -36,7 +40,7 @@ class MemberSerive:
         self.members[mId] = newMember
 
         # DB(members.json)에 새 회원 정보 저장
-        self.save_members(self.members)  # {}
+        self.re_saveMembers()  # {}
 
         print('MEMBER SIGN-UP SUCCESS!!')
 
@@ -99,7 +103,7 @@ class MemberSerive:
         memberForModify['mPhone'] = mPhone
         memberForModify['mModDate'] = util_time.getCurrentDateTime()
 
-        self.save_members(self.members)
+        self.re_saveMembers()
 
         print(f'MODIFY SUCCESS!!')
 
@@ -113,7 +117,7 @@ class MemberSerive:
         if confirm == 'Y':
             self.members = self.load_members()
             del self.members[session.getSignInedMemberId()]
-            self.save_members(self.members)
+            self.re_saveMembers()
             session.setSignInedMemberId()
             print('DELETE SUCCESS!!')
 
