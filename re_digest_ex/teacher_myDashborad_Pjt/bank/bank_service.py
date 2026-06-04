@@ -88,9 +88,9 @@ class BankService:
 	def createdUuidAcct(self):
 		self.myAccounts = self.accounts[session.getSignInedMemberId()]
 		self.myAccounts[str(uuid.uuid4())] = {
-'balance': 0,
-'histories': []
-}
+			'balance': 0,
+			'histories': []
+			}
 
 
 	def checkedDev(self):
