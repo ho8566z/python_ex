@@ -10,6 +10,6 @@ print(type(fit))
 text = "hello"
 print(type(text))
 
-#블리언
+#불리언
 flag = True
 print(type(flag))
