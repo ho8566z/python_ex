@@ -7,8 +7,8 @@ fit = 3.14
 print(type(fit))
 
 #문자열
-str = "hello"
-print(type(str))
+text = "hello"
+print(type(text))
 
 #블리언
 flag = True
