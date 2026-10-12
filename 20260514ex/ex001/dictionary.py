@@ -1,4 +1,4 @@
-# 컨테이나 자료형(container data type)
+# 컨테이너 자료형(container data type)
 
 # 많은 데이터를 효율적으로 관리하기 위해 사용한다
 # list(리스트)
