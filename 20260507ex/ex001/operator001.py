@@ -39,7 +39,7 @@
 # # 97개의 빵을 3개씩 나누어 줄 때, 최대 몇명에게 나누어 줄 수 있는지?
 # bread = 97
 # breadCnt = 3
-# maxFriendsCnt = bread //breadCnt
+# maxFriendsCnt = bread // breadCnt
 # print(f'빵을 나누어 줄 수 있는 최대 학생 수: {maxFriendsCnt}')
 
 # restBreadCnt = bread % breadCnt
