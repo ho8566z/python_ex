@@ -6,6 +6,7 @@ from todo import todo_service
 
 def main():
     flag = True
+    # 99(SYSTEM-OUT)가 입력될 때까지 메뉴를 반복해서 보여준다
     while flag:
         menuNum = int(input('1.MEMBER    2.BANK    3.MEMO    4.TODO    99.SYSTEM-OUT :  '))
         if menuNum == config.MEMBER_SERVICE:
