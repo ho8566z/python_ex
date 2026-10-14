@@ -11,6 +11,7 @@ BANK_DATE = "BANK_DATE"     #[은행_날짜]는 "은행_날짜"이다
 MEMO_DATE = "DATE"
 MEMO_TEXT = "TEXT"
 
+# 할 일(TODO) 서비스에서 사용하는 키
 TODO_TEXT = "TEXT"
 REGISTER_DAY = "REGISTER"
 EXPIRED_DAY = "EXPIRED"
