@@ -45,7 +45,7 @@ def setNewNum(uId, uPw, uEmail, uPhone):
     members[uId] = {
         'uId': uId,
         'uPw': uPw,
-        'uEmil': uEmail,
+        'uEmail': uEmail,
         'uPhone': uPhone
     }
 
