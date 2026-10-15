@@ -83,13 +83,6 @@ while flag:
         uPhone = input('input membetr Phone: ')
 
         setNewNum(uId, uPw, uEmail, uPhone)
-        # members[uId] = {
-        #         'uId': uId,
-        #         'uPW': uPw,
-        #         'uEmil': uEmail,
-        #         'uPhone': uPhone
-        #     }
-
         print('SIGN UP - SUCCESS')
 
         if DEV_MOD: print(f'members: {members}')
