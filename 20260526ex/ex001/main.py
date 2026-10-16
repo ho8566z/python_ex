@@ -10,7 +10,7 @@ nums.append(int(input('네번째 숫자 입력: ')))
 nums.append(int(input('다섯번째 숫자 입력: ')))
 nums.append(int(input('여섯번째 숫자 입력: ')))
 
-lm.setUNumbers(nums)    #사용자가 선책한 번호모음
+lm.setUNumbers(nums)    #사용자가 선택한 번호모음
 lm.setRNumbers()        #랜덤으로 선택한 번호모음
 
 print(f'이번주 로또 번호: {lm.getRNumbers()}')
