@@ -7,7 +7,7 @@ fabs(): 절댓값을 반환
 ceil(): 소수점 이하 올림한 값을 반환
 floor(): 소수점 이하 내림한 값을 반환
 trunc(): 소수점 이하 버림한 값을 반환
-gcd(): 최대공약수를 반환'
+gcd(): 최대공약수를 반환
 factorial(): 팩토리얼한 값을 반환
 sqrt(): 제곱근을 반환
 '''
@@ -18,7 +18,7 @@ print(f'math.fabs(-3.1415): {math.fabs(-3.1415)}')      # 절댓값
 print(f'math.ceil(3.1415): {math.ceil(3.1415)}')        # 올림
 print(f'math.floor(-3.1415): {math.floor(-3.1415)}')    # 내림
 print(f'math.trunc(-3.1415): {math.trunc(-3.1415)}')    # 버림
-print(f'math.gcd(9, 21): {math.gcd(9, 21)}')            # 절댓값
+print(f'math.gcd(9, 21): {math.gcd(9, 21)}')            # 최대공약수
 print(f'math.factorial(7): {math.factorial(7)}')        # 팩토리얼
 print(f'math.sqrt(9): {math.sqrt(9)}')                  # 제곱근
 # math.fabs(-3.1415): 3.1415
