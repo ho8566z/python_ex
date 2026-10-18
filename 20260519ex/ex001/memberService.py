@@ -17,6 +17,8 @@ PRINT_MY_INFO       = 3
 PRINT_ALL_MEMBER_INFO      = 4
 SYSTEM_SHUTDOWN     = 99
 
+MAX_SIGN_IN_TRY     = 3
+
 DEV_MOD = False
 
 members = {}
@@ -102,14 +104,14 @@ while flag:
                 else:
                     print('SIGN IN - FAIL')
                     signInCount += 1
-                    if signInCount >= 3:
-                        print('로그인을 3회 실패했습니다.')
+                    if signInCount >= MAX_SIGN_IN_TRY:
+                        print(f'로그인을 {MAX_SIGN_IN_TRY}회 실패했습니다.')
                         break
             else:
                 print(f'존재하지 않는 ID입니다.')
                 signInCount += 1
-                if signInCount >= 3:
-                    print('로그인을 3회 실패했습니다.')
+                if signInCount >= MAX_SIGN_IN_TRY:
+                    print(f'로그인을 {MAX_SIGN_IN_TRY}회 실패했습니다.')
                     break
 
 
