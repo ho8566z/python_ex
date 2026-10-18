@@ -73,7 +73,7 @@ while flag:
     if userSelectedMenuNum == SIGN_UP:        #1.회원가입
         uId = input('input member ID: ')
         if not isMember(uId):       #False: 회원이 없는 경우(가입o), True: 회원이 있는 경우(가입x)
-            uPw = input('input membetr PW: ')
+            uPw = input('input member PW: ')
             uEmail = input('input member Email: ')
             while True:
                 if '@' not in uEmail:
@@ -82,7 +82,7 @@ while flag:
                 else:
                     break
 
-            uPhone = input('input membetr Phone: ')
+            uPhone = input('input member Phone: ')
 
             addMember(uId, uPw, uEmail, uPhone)
             print('SIGN UP - SUCCESS')
@@ -117,7 +117,7 @@ while flag:
 
     elif userSelectedMenuNum == PRINT_MY_INFO:      #3.내 회원정보 출력
         uId = input('input member ID: ')
-        uPw = input('input membetr PW: ')
+        uPw = input('input member PW: ')
 
         if uId in members:
             uInfo = members[uId]
@@ -145,9 +145,9 @@ while flag:
         print('Good Bye')
 # 메뉴: 1.회원가입   2.로그인   3.내 회원정보 출력   4.모든 회원정보 출력   99.종료1
 # input member ID: 1111
-# input membetr PW: 2222
+# input member PW: 2222
 # input member Email: 3333@
-# input membetr Phone: 4444
+# input member Phone: 4444
 # SIGN UP - SUCCESS
 # 메뉴: 1.회원가입   2.로그인   3.내 회원정보 출력   4.모든 회원정보 출력   99.종료2
 # input member ID: 1111
@@ -155,7 +155,7 @@ while flag:
 # SIGN UP - SUCCESS
 # 메뉴: 1.회원가입   2.로그인   3.내 회원정보 출력   4.모든 회원정보 출력   99.종료3
 # input member ID: 1111
-# input membetr PW: 2222
+# input member PW: 2222
 # SIGN UP - SUCCESS
 # ----------------------------------------
 # uId: 1111
