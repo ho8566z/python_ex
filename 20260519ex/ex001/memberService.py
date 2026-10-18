@@ -80,12 +80,12 @@ while flag:
                 else:
                     break
 
-        uPhone = input('input membetr Phone: ')
+            uPhone = input('input membetr Phone: ')
 
-        setNewNum(uId, uPw, uEmail, uPhone)
-        print('SIGN UP - SUCCESS')
+            setNewNum(uId, uPw, uEmail, uPhone)
+            print('SIGN UP - SUCCESS')
 
-        if DEV_MOD: print(f'members: {members}')
+            if DEV_MOD: print(f'members: {members}')
 
 
     elif userSelectedMenuNum == SIGN_IN:      #2.로그인
