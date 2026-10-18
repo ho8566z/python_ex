@@ -43,7 +43,7 @@ def getSelectedMenuNum():
     selectedMenuNum = int(input('메뉴: 1.회원가입   2.로그인   3.내 회원정보 출력   4.모든 회원정보 출력   99.종료'))
     return selectedMenuNum
 
-def setNewNum(uId, uPw, uEmail, uPhone):
+def addMember(uId, uPw, uEmail, uPhone):
     members[uId] = {
         'uId': uId,
         'uPw': uPw,
@@ -84,7 +84,7 @@ while flag:
 
             uPhone = input('input membetr Phone: ')
 
-            setNewNum(uId, uPw, uEmail, uPhone)
+            addMember(uId, uPw, uEmail, uPhone)
             print('SIGN UP - SUCCESS')
 
             if DEV_MOD: print(f'members: {members}')
