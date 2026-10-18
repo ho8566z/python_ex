@@ -97,10 +97,10 @@ while flag:
             if uId in members:
                 uInfo = members[uId]
                 if uInfo['uPw'] == uPw:
-                    print('SIGN UP - SUCCESS')
+                    print('SIGN IN - SUCCESS')
                     break
                 else:
-                    print('SIGN UP - FAIL')
+                    print('SIGN IN - FAIL')
                     signInCount += 1
                     if signInCount >= 3:
                         print('로그인을 3회 실패했습니다.')
@@ -120,7 +120,7 @@ while flag:
         if uId in members:
             uInfo = members[uId]
             if uInfo['uPw'] == uPw:
-                print('SIGN UP - SUCCESS')
+                print('SIGN IN - SUCCESS')
 
                 print('-' * 40)
                 for key, value in uInfo.items():
@@ -128,7 +128,7 @@ while flag:
                 print('-' * 40)
 
             else:
-                print('SIGN UP - FAIL')
+                print('SIGN IN - FAIL')
         else:
             print(f'존재하지 않는 ID입니다.')
 
