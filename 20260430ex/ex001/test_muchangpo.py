@@ -18,7 +18,7 @@ no_44 = "lewis_hamilton"
 no_55 = "carlos_sainz"
 no_63 = "george_russell"
 no_77 = "valtteri_bottas"
-n0_81 = "oscar_piastri"
+no_81 = "oscar_piastri"
 no_87 = "oliver_bearman"
 print(no_1)
 
