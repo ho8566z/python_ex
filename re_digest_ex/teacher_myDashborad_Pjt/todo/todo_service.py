@@ -94,7 +94,7 @@ class TodoService:
 
     def todoReading(self):
         self.replaceTodo()
-        for idx, myTodo in enumerate(myTodo):
+        for idx, myTodo in enumerate(self.myTodos):
             print('==================================================================================\n')
             print(f'[{idx+1}]')
             print(f"TEST: [{myTodo['tText']}]")
