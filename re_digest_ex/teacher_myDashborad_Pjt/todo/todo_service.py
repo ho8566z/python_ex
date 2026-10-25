@@ -67,10 +67,10 @@ class TodoService:
         self.save_todos(self.todos)
 
 
-    def inputTodoWirte(self):
+    def inputTodoWrite(self):
         self.replaceTodo()
         tText = input('Input new todo txt :  ')
-        tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
+        tExpDate = input('Input todo expiration date(ex: 2026-06-02 09:05:05) :  ')
         
         self.todo = {
             'tText': tText,
@@ -87,8 +87,8 @@ class TodoService:
         self.checkedDev()
                         
             
-    def todoWirtwe(self):
-        self.inputTodoWirte()
+    def todoWrite(self):
+        self.inputTodoWrite()
 
 ##============================================================================================================#
 
@@ -118,7 +118,7 @@ class TodoService:
 
         todoNumber = int(input('Enter the todo number :  '))
         tText = input('Input todo txt :  ')
-        tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
+        tExpDate = input('Input todo expiration date(ex: 2026-06-02 09:05:05) :  ')
 
         self.todo = {
             'tText': tText,
@@ -192,7 +192,7 @@ class TodoService:
 
                 memuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    5.COMPLETE-CHANGE    99.SERVICE-OUT :  '))
                 if memuNum == todo_config.WRITE:
-                    self.todoWirtwe()
+                    self.todoWrite()
                     
                 elif memuNum == todo_config.READ:
                     self.todoRead()
