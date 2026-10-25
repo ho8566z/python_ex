@@ -199,9 +199,10 @@ class BankService:
 	def zeroInput(self):
 		if self.withdrawalAmount > self.myAccounts[self.withdrawalAccountNumber]['balance']:
 			print('ERROR! CHECK BALANCE!!')
-		else:
-			self.myAccounts[self.withdrawalAccountNumber]['balance'] -= self.withdrawalAmount
-			self.myAccounts[self.withdrawalAccountNumber]['histories'].insert(0, self.withdrawal)
+			return
+
+		self.myAccounts[self.withdrawalAccountNumber]['balance'] -= self.withdrawalAmount
+		self.myAccounts[self.withdrawalAccountNumber]['histories'].insert(0, self.withdrawal)
 
 		self.save_accounts(self.accounts)
 		print('WITHDRAWAL SUCCESS!!')
