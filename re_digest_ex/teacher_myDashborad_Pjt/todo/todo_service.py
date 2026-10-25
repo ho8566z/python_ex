@@ -97,7 +97,7 @@ class TodoService:
         for idx, myTodo in enumerate(self.myTodos):
             print('==================================================================================\n')
             print(f'[{idx+1}]')
-            print(f"TEST: [{myTodo['tText']}]")
+            print(f"TEXT: [{myTodo['tText']}]")
             print(f"EXPIRATIONDATE: [{myTodo['tExpDate']}]")
             print(f"REGISTER DATE: [{myTodo['tRegDate']}]")
             print(f"MODIFY DATE: [{myTodo['tModDate']}]")
