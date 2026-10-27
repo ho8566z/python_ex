@@ -441,7 +441,7 @@ print(f'당신의 전기요금은 {totalPrice:.2f}원 입니다.')
 myScore = int(input('시험점수 입력: '))
 targetScore = 85
 
-result = 'succes' if myScore >= targetScore else 'fail'
+result = 'success' if myScore >= targetScore else 'fail'
 print(f'result: {result}')
 '''
 
