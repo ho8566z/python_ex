@@ -37,8 +37,8 @@ class MemoService:
             json.dump(memos, f, ensure_ascii=False, indent=4)
 
 
-        # JSON 파일을 읽어서 애플리케이션으로 데이터를 저장하는 것
     def load_memos(self):
+        """JSON 파일을 읽어서 애플리케이션으로 데이터를 불러온다."""
         with open(self.dbFile, 'r', encoding='utf-8') as f:
             return json.load(f)
     
