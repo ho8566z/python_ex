@@ -130,7 +130,14 @@ class BankService:
                     else:
                         break
 
-                depositAmount = int(input('Enter deposit amount :  '))
+                try:
+                    depositAmount = int(input('Enter deposit amount :  '))
+                except ValueError:
+                    print('Please enter a valid amount!!')
+                    continue
+                if depositAmount <= 0:
+                    print('Amount must be greater than zero!!')
+                    continue
                 depositHistory = input('Enter deposit history :  ')
                 deposit = {
                     'dAmount': depositAmount,
@@ -169,7 +176,14 @@ class BankService:
                     else:
                         break
 
-                withdrawalAmount = int(input('Enter withdrawal amount :  '))
+                try:
+                    withdrawalAmount = int(input('Enter withdrawal amount :  '))
+                except ValueError:
+                    print('Please enter a valid amount!!')
+                    continue
+                if withdrawalAmount <= 0:
+                    print('Amount must be greater than zero!!')
+                    continue
                 withdrawalHistory = input('Enter withdrawal history :  ')
                 withdrawal = {
                     'wAmount': withdrawalAmount,
