@@ -75,6 +75,9 @@ class TodoService:
                 myTodos = self.todos[session.getSignInedMemberId()]
                 
                 tText = input('Input new todo txt :  ')
+                if not tText.strip():
+                    print('Text cannot be empty!!')
+                    continue
                 tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
                 
                 todo = {

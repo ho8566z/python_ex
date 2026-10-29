@@ -74,6 +74,9 @@ class MemoService:
             
             if menuNum == memo_config.WRITE:
                 newMemo = input('Write new memo :  ')
+                if not newMemo.strip():
+                    print('Text cannot be empty!!')
+                    continue
 
                 self.memos = self.load_memos()
                 myMemos = self.memos[session.getSignInedMemberId()]
