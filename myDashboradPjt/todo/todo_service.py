@@ -181,6 +181,7 @@ class TodoService:
                     print('The selected item was not found!!')
                     continue
                 myTodos[todoNumber-1]['tComplete'] = not myTodos[todoNumber-1]['tComplete']
+                myTodos[todoNumber-1]['tModDate'] = util_time.getCurrentDateTime()
                 self.save_todos(self.todos)
                 print('COMPLETE CHANGE SUCCESS!!')
 
