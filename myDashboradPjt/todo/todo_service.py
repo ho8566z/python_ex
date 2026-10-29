@@ -34,6 +34,7 @@ class TodoService:
 
     # JSON 파일 저장
     def save_todos(self, todos):   # {}
+        os.makedirs(os.path.dirname(self.dbFile), exist_ok=True)
         with open(self.dbFile, 'w', encoding='utf-8') as f:
             json.dump(todos, f, ensure_ascii=False, indent=4)
 

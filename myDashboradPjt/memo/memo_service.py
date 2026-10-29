@@ -33,6 +33,7 @@ class MemoService:
 
         # 애플리케이션의 데이터를 JSON 파일에 저장하는 것
     def save_memos(self, memos):   # {}
+        os.makedirs(os.path.dirname(self.dbFile), exist_ok=True)
         with open(self.dbFile, 'w', encoding='utf-8') as f:
             json.dump(memos, f, ensure_ascii=False, indent=4)
 

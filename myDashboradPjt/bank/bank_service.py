@@ -35,6 +35,7 @@ class BankService:
 
     # JSON 파일 저장
     def save_accounts(self, accounts):   # {}
+        os.makedirs(os.path.dirname(self.dbFile), exist_ok=True)
         with open(self.dbFile, 'w', encoding='utf-8') as f:
             json.dump(accounts, f, ensure_ascii=False, indent=4)
 
