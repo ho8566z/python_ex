@@ -112,7 +112,14 @@ class TodoService:
                     print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
                     print('----------------------------------------------------------------------------------\n')
 
-                todoNumber = int(input('Enter the todo number :  '))
+                try:
+                    todoNumber = int(input('Enter the todo number :  '))
+                except ValueError:
+                    print('Please enter a valid item number!!')
+                    continue
+                if not 1 <= todoNumber <= len(myTodos):
+                    print('The selected item was not found!!')
+                    continue
                 tText = input('Input todo txt :  ')
                 tExpDate = input('Input todo exprtation date(ex: 2026-06-02 09:05:05) :  ')
 
@@ -139,7 +146,14 @@ class TodoService:
                     print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
                     print('----------------------------------------------------------------------------------\n')
 
-                todoNumber = int(input('Enter the todo number :  '))
+                try:
+                    todoNumber = int(input('Enter the todo number :  '))
+                except ValueError:
+                    print('Please enter a valid item number!!')
+                    continue
+                if not 1 <= todoNumber <= len(myTodos):
+                    print('The selected item was not found!!')
+                    continue
                 myTodos.pop(todoNumber-1)
                 # DEL버전: del myTodos[todoNumber-1]
                 self.save_todos(self.todos)
@@ -155,7 +169,14 @@ class TodoService:
                     print(f"[{idx+1}] {myTodo['tText']} [{myTodo['tExpDate']}][{myTodo['tComplete']}]")
                     print('----------------------------------------------------------------------------------\n')
 
-                todoNumber = int(input('Enter the todo number :  '))
+                try:
+                    todoNumber = int(input('Enter the todo number :  '))
+                except ValueError:
+                    print('Please enter a valid item number!!')
+                    continue
+                if not 1 <= todoNumber <= len(myTodos):
+                    print('The selected item was not found!!')
+                    continue
                 myTodos[todoNumber-1]['tComplete'] = not myTodos[todoNumber-1]['tComplete']
                 self.save_todos(self.todos)
                 print('COMPLETE CHANGE SUCCESS!!')

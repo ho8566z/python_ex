@@ -99,7 +99,14 @@ class MemoService:
                     print('==================================================================================\n')
                     print(f'[{idx+1}] {memo}')
 
-                selectedNumber = int(input('Please select the number to modify :  '))
+                try:
+                    selectedNumber = int(input('Please select the number to modify :  '))
+                except ValueError:
+                    print('Please enter a valid item number!!')
+                    continue
+                if not 1 <= selectedNumber <= len(myMemos):
+                    print('The selected item was not found!!')
+                    continue
                 memo = input('Edit memo :  ')
                 myMemos[selectedNumber-1] = memo
 
@@ -115,7 +122,14 @@ class MemoService:
                 for idx, memo in enumerate(myMemos):
                     print(f'[{idx+1}] {memo}')
 
-                selectedNumber = int(input('Please select the number to delete :  '))
+                try:
+                    selectedNumber = int(input('Please select the number to delete :  '))
+                except ValueError:
+                    print('Please enter a valid item number!!')
+                    continue
+                if not 1 <= selectedNumber <= len(myMemos):
+                    print('The selected item was not found!!')
+                    continue
                 myMemos.pop(selectedNumber-1)
                 self.save_memos(self.memos)
 
