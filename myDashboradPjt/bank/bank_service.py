@@ -63,10 +63,18 @@ class BankService:
         while flag:
 
             if self.isMyAccount():
-                menuNum = int(input('1.ACCOUNT-LIST    2.NEW-ACCOUNT    3.DEPOSIT    4.WITHDRAWAL    99.SERVICE-OUT :  '))
+                try:
+                    menuNum = int(input('1.ACCOUNT-LIST    2.NEW-ACCOUNT    3.DEPOSIT    4.WITHDRAWAL    99.SERVICE-OUT :  '))
+                except ValueError:
+                    print('Please enter a valid menu number!!')
+                    continue
             else:
                 print('No account yet!!')
-                menuNum = int(input('2.NEW-ACCOUNT    99.SERVICE-OUT :  '))
+                try:
+                    menuNum = int(input('2.NEW-ACCOUNT    99.SERVICE-OUT :  '))
+                except ValueError:
+                    print('Please enter a valid menu number!!')
+                    continue
             
             if menuNum == bank_config.ACCOUNT_LIST:
                 self.accounts = self.load_accounts()

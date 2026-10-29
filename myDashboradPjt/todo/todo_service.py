@@ -65,7 +65,11 @@ class TodoService:
                 self.todos[session.getSignInedMemberId()] = []
                 self.save_todos(self.todos)
 
-            memuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    5.COMPLETE-CHANGE    99.SERVICE-OUT :  '))
+            try:
+                memuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    5.COMPLETE-CHANGE    99.SERVICE-OUT :  '))
+            except ValueError:
+                print('Please enter a valid menu number!!')
+                continue
             if memuNum == todo_config.WRITE:
                 self.todos = self.load_todos()
                 myTodos = self.todos[session.getSignInedMemberId()]

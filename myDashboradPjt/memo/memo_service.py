@@ -66,7 +66,11 @@ class MemoService:
                 self.memos[session.getSignInedMemberId()] = []
                 self.save_memos(self.memos)
             
-            menuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    99.SERVICE-OUT :  '))
+            try:
+                menuNum = int(input('1.WRITE    2.READ    3.UPDATE    4.DELETE    99.SERVICE-OUT :  '))
+            except ValueError:
+                print('Please enter a valid menu number!!')
+                continue
             
             if menuNum == memo_config.WRITE:
                 newMemo = input('Write new memo :  ')
