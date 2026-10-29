@@ -62,6 +62,7 @@ class MemoService:
         while flag:
 
             if not self.isMyMemos():
+                self.memos = self.load_memos()
                 self.memos[session.getSignInedMemberId()] = []
                 self.save_memos(self.memos)
             

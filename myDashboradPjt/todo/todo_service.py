@@ -61,6 +61,7 @@ class TodoService:
         flag = True
         while flag:
             if not self.isMyTodos():
+                self.todos = self.load_todos()
                 self.todos[session.getSignInedMemberId()] = []
                 self.save_todos(self.todos)
 
