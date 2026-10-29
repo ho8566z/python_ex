@@ -76,6 +76,12 @@ class BankService:
                     print('Please enter a valid menu number!!')
                     continue
             
+            if menuNum in (bank_config.ACCOUNT_LIST, bank_config.DEPOSIT, bank_config.WITHDRAWAL) and not self.accounts.get(session.getSignInedMemberId()):
+                self.accounts = self.load_accounts()
+                if not self.accounts.get(session.getSignInedMemberId()):
+                    print('Please create an account first!!')
+                    continue
+
             if menuNum == bank_config.ACCOUNT_LIST:
                 self.accounts = self.load_accounts()
                 myAccounts = self.accounts[session.getSignInedMemberId()]
