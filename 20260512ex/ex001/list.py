@@ -10,7 +10,7 @@
 # 주소를 담고 있다 때문에 데이터를 직접 관리하지 않고, '참조'한다
 
 
-# list: 리스트를 선언할때는 대괄호를 이용해서 데이터를 묶고, 쉼표로 구분한다
+# list: 리스트를 선언할 때는 대괄호를 이용해서 데이터를 묶고, 쉼표로 구분한다
 '''
 fruits = ['apple', 'grape', 'peach', 'melon', 'watermelon']   #fruits = fruit_list
 print(fruits[0:])   #['apple', 'grape', 'peach', 'melon', 'watermelon']
