@@ -1,3 +1,4 @@
+# import 되면 모듈 이름이, 직접 실행하면 '__main__' 이 __name__ 에 담긴다.
 def fun():
     print('module03의 함수 실행')
 
