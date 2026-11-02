@@ -1,3 +1,4 @@
+# 일기장 메뉴에서 선택하는 번호
 DIARY_WRITE = 1
 DIARY_READ = 2
 SYSTEM_SHUTDPWN = 99
