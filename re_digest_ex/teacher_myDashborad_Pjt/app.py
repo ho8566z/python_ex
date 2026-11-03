@@ -4,6 +4,7 @@ from bank import bank_service
 from memo import memo_service
 from todo import todo_service
 
+# 메뉴 번호에 맞는 서비스를 골라 실행하는 진입 함수
 def main():
     flag = True
     while flag:
@@ -20,6 +21,7 @@ def main():
         elif menuNum == config.TODO_SERVICE:
             todo_service.TodoService().run()
             
+        # 종료 번호를 고르면 반복문을 멈춘다
         elif menuNum == config.SYSTEM_OUT:
             flag = False
         
