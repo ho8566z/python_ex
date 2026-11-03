@@ -22,6 +22,7 @@ no_81 = "oscar_piastri"
 no_87 = "oliver_bearman"
 print(no_1)
 
+# 같은 변수 five 에 값을 다시 대입하면 이전 값은 사라진다
 five = "ayrton_senna"
 print(five)
 five = "sebastian_vettel"
@@ -33,5 +34,6 @@ a = 10
 b = 20
 print(a,b)
 
+# 튜플 언패킹으로 임시 변수 없이 a 와 b 의 값을 맞바꾼다
 a,b = b,a
 print(a,b)
