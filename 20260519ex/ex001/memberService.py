@@ -40,10 +40,12 @@ if DEV_MOD:
 
 # functions START
 def getSelectedMenuNum():
+    '''메뉴를 출력하고 사용자가 입력한 메뉴 번호를 정수로 반환한다.'''
     selectedMenuNum = int(input('메뉴: 1.회원가입   2.로그인   3.내 회원정보 출력   4.모든 회원정보 출력   99.종료'))
     return selectedMenuNum
 
 def addMember(uId, uPw, uEmail, uPhone):
+    '''입력받은 회원 정보를 회원ID를 키로 하여 members 딕셔너리에 저장한다.'''
     members[uId] = {
         'uId': uId,
         'uPw': uPw,
@@ -52,6 +54,7 @@ def addMember(uId, uPw, uEmail, uPhone):
     }
 
 def isMember(uId):
+    '''회원ID가 이미 가입되어 있으면 안내 메시지를 출력하고 True, 아니면 False를 반환한다.'''
     if uId in members:
         print(f'{uId}은/는 이미 사용중입니다. 다시 입력하세요.')
         return True
@@ -59,6 +62,7 @@ def isMember(uId):
         return False
 
 def printAllMemberInfo(value):
+    '''회원 한 명의 정보 딕셔너리를 '키: 값' 형태로 한 줄씩 출력한다.'''
     for key1, value1 in value.items():
         print(f'{key1}: {value1}')
 
