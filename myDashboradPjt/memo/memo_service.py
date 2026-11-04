@@ -11,6 +11,7 @@ class MemoService:
 
 
     def init_database(self):
+        '''db/memos.json 경로를 정하고, 파일이 없으면 새로 만들고 있으면 불러온다.'''
         # 현재 파일 위치
         BASE_PATH = os.path.dirname(os.path.abspath(__file__))
         print(f'BASE_PATH: {BASE_PATH}')
@@ -33,6 +34,7 @@ class MemoService:
 
         # 애플리케이션의 데이터를 JSON 파일에 저장하는 것
     def save_memos(self, memos):   # {}
+        '''메모 딕셔너리를 JSON 파일에 저장한다. db 폴더가 없으면 만든다.'''
         os.makedirs(os.path.dirname(self.dbFile), exist_ok=True)
         with open(self.dbFile, 'w', encoding='utf-8') as f:
             json.dump(memos, f, ensure_ascii=False, indent=4)
@@ -40,11 +42,13 @@ class MemoService:
 
         # JSON 파일을 읽어서 애플리케이션으로 데이터를 저장하는 것
     def load_memos(self):
+        '''JSON 파일에서 전체 메모를 읽어 딕셔너리로 반환한다.'''
         with open(self.dbFile, 'r', encoding='utf-8') as f:
             return json.load(f)
     
 
     def isMyMemos(self):
+        '''로그인한 회원의 메모 목록이 이미 있는지 반환한다.'''
         allMemos = self.load_memos()
         if session.getSignInedMemberId() in allMemos:
             return True
@@ -53,6 +57,7 @@ class MemoService:
     
 
     def run(self):
+        '''로그인 확인 후 메모 작성·조회·수정·삭제 메뉴를 반복 처리한다.'''
 
         if session.getSignInedMemberId() == '':
             print('Please SIGN-IN!!')
