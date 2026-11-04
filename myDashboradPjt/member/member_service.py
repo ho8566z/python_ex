@@ -13,6 +13,7 @@ class MemberSerive:
 
     # 회원 가입 기능
     def sign_up(self):
+        '''새 회원 정보를 입력받아 ID 중복을 확인한 뒤 members.json 에 저장한다.'''
         mId = input('Input new member ID :  ')
 
         # ID 중복체크를 할 때 self.members를 사용한다.
@@ -46,6 +47,7 @@ class MemberSerive:
 
     # 회원 로그인 기능
     def sign_in(self):
+        '''ID·비밀번호가 일치하면 session 에 로그인 회원 ID 를 저장한다.'''
         mId = input('Input member ID :  ')
         mPw = input('Input member PW :  ')
 
@@ -81,6 +83,7 @@ class MemberSerive:
 
     # 회원 로그아웃 기능
     def sign_out(self):
+        '''session 의 로그인 회원 ID 를 비워 로그아웃 상태로 만든다.'''
         session.setSignInedMemberId()
         print('SIGN-OUT SUCCESS!!')
 
