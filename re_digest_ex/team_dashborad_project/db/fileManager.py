@@ -19,11 +19,13 @@ PATH_TODO = f"{RESOURCE_PATH}\\todo.json"
 
 
 def saveAtFile(path, data):
+    """딕셔너리·리스트 데이터를 UTF-8 JSON 파일(들여쓰기 4칸, 한글 유지)로 저장한다."""
     with open(f"{path}", "w", encoding="utf-8") as file:
         json.dump(data, file, indent=4, ensure_ascii=False)
 
 
 def dbSaveAllAtFile():
+    """dbManager 의 회원·계좌·메모·할일 데이터를 각각의 JSON 파일에 저장한다."""
     saveAtFile(PATH_MEMBER, dbManager.members)
     saveAtFile(PATH_BANK, dbManager.bankAccounts)
     saveAtFile(PATH_MEMO, dbManager.memos)
@@ -31,6 +33,7 @@ def dbSaveAllAtFile():
 
 
 def loadFromFile(path, hook=None):
+    """JSON 파일을 읽어 파이썬 객체로 반환한다. hook 이 있으면 object_hook 으로 사용한다."""
     with open(f"{path}", encoding="utf-8") as file:
         data = json.load(file, object_hook=hook)
         return data
@@ -46,6 +49,7 @@ def restoreBankLog(dct):
 
 
 def dbLoadAllFromFile():
+    """JSON 파일에서 회원·계좌·메모·할일 데이터를 읽어 dbManager 에 채운다."""
     dbManager.members = loadFromFile(PATH_MEMBER)
     dbManager.bankAccounts = loadFromFile(PATH_BANK, restoreBankLog)
     dbManager.memos = loadFromFile(PATH_MEMO)
