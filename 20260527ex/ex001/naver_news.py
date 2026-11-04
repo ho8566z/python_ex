@@ -42,6 +42,7 @@ def getNaverSearch(node, srcText, start, display):
 
 
 def getPostData(post, jsonResult, cnt):
+    '''검색 결과 한 건에서 제목·설명·링크·날짜를 뽑아 jsonResult 에 추가한다.'''
     title = post['title']
     description = post['description']
     org_link = post['originallink']
@@ -60,6 +61,7 @@ def getPostData(post, jsonResult, cnt):
 
 
 def main():
+    '''검색어를 입력받아 뉴스 검색 결과를 모두 모은 뒤 JSON 파일로 저장한다.'''
     node = 'news'   #'크롤링'하는 대상을 지정
     srcText = input('검색어 입력: ')
     cnt = 0
