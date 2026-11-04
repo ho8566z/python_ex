@@ -24,10 +24,12 @@ def createMember(id, pw, mail, phone):
 
 
 def getMemberIds():
+    """가입된 모든 회원ID 목록(keys)을 반환한다."""
     return members.keys()
 
 
 def getMemberPw(id):
+    """회원ID에 해당하는 회원의 비밀번호를 반환한다."""
     return members[id][config.PW]
 
 
@@ -75,6 +77,7 @@ def createdFlowHistory(id, inputMoney, kind):
 
 # ------ memo ------
 def getMemoList(id):
+    """회원ID에 해당하는 회원의 메모 목록을 반환한다."""
     return memos[id]
 
 
