@@ -13,6 +13,7 @@ class BankService:
 
 
     def init_database(self):
+        '''db/accounts.json 경로를 정하고, 파일이 없으면 새로 만들고 있으면 불러온다.'''
         # 현재 파일 위치
         BASE_PATH = os.path.dirname(os.path.abspath(__file__))
         print(f'BASE_PATH: {BASE_PATH}')
@@ -35,17 +36,20 @@ class BankService:
 
     # JSON 파일 저장
     def save_accounts(self, accounts):   # {}
+        '''계좌 딕셔너리를 JSON 파일에 저장한다. db 폴더가 없으면 만든다.'''
         os.makedirs(os.path.dirname(self.dbFile), exist_ok=True)
         with open(self.dbFile, 'w', encoding='utf-8') as f:
             json.dump(accounts, f, ensure_ascii=False, indent=4)
 
 
     def load_accounts(self):
+        '''JSON 파일에서 전체 계좌 정보를 읽어 딕셔너리로 반환한다.'''
         with open(self.dbFile, 'r', encoding='utf-8') as f:
             return json.load(f)
         
 
     def isMyAccount(self):
+        '''로그인한 회원의 계좌가 하나라도 있는지 반환한다.'''
         allAcccounts = self.load_accounts()
         if session.getSignInedMemberId() in allAcccounts:
             return True
@@ -54,6 +58,7 @@ class BankService:
 
 
     def run(self):
+        '''로그인 확인 후 계좌 목록·개설·입금·출금 메뉴를 반복 처리한다.'''
 
         if session.getSignInedMemberId() == '':
             print('Please SIGN-IN!!')
