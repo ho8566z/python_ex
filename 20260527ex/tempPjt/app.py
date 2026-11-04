@@ -13,6 +13,7 @@ config.client_secret
 
 # NAVER 데이터 요청 함수
 def getRequestUrl(url):
+    '''NAVER API 에 요청을 보내 응답 본문을 문자열로 반환한다. 실패하면 None.'''
     req = urllib.request.Request(url)
     req.add_header('X-Naver-Client-Id', config.client_id)
     req.add_header('X-Naver-Client-Secret', config.client_secret)
@@ -31,6 +32,7 @@ def getRequestUrl(url):
 
 # NAVER 뉴스 검색 함수
 def getNaverSearch(node, srcText, start, display):
+    '''검색 종류·검색어·시작 위치로 NAVER 검색 API 를 호출해 JSON 을 반환한다.'''
     base = 'https://openapi.naver.com/v1/search'
     node = f'/{node}.json'
 
@@ -48,6 +50,7 @@ def getNaverSearch(node, srcText, start, display):
 
 # 뉴스 데이터 정리 함수
 def getPostData(post, cnt):
+    '''검색 결과 한 건을 화면에 쓸 딕셔너리로 가공한다.'''
 
     title = post['title']
     description = post['description']
@@ -73,6 +76,7 @@ def getPostData(post, cnt):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    '''검색어를 받아 뉴스 검색 결과를 모아 화면에 보여준다.'''
 
     jsonResult = []
 
