@@ -35,12 +35,14 @@ class TodoService:
 
     # JSON 파일 저장
     def save_todos(self, todos):   # {}
+        '''할 일 딕셔너리를 JSON 파일에 저장한다. db 폴더가 없으면 만든다.'''
         os.makedirs(os.path.dirname(self.dbFile), exist_ok=True)
         with open(self.dbFile, 'w', encoding='utf-8') as f:
             json.dump(todos, f, ensure_ascii=False, indent=4)
 
 
     def load_todos(self):
+        '''JSON 파일에서 전체 할 일을 읽어 딕셔너리로 반환한다.'''
         with open(self.dbFile, 'r', encoding='utf-8') as f:
             return json.load(f)
         
