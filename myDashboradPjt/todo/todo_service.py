@@ -12,6 +12,7 @@ class TodoService:
 
 
     def init_database(self):
+        '''db/todos.json 경로를 정하고, 파일이 없으면 새로 만들고 있으면 불러온다.'''
         # 현재 파일 위치
         BASE_PATH = os.path.dirname(os.path.abspath(__file__))
         print(f'BASE_PATH: {BASE_PATH}')
