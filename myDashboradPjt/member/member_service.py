@@ -5,7 +5,7 @@ import os
 import json
 import session
 
-class MemberSerive:
+class MemberService:
     def __init__(self):
         self.members = {}
         self.init_database()
@@ -190,5 +190,5 @@ class MemberSerive:
 
 
 if __name__ == '__main__':
-    memberSerive = MemberSerive()
+    memberSerive = MemberService()
     memberSerive.run()
