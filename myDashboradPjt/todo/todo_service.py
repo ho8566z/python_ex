@@ -48,6 +48,7 @@ class TodoService:
         
 
     def isMyTodos(self):
+        '''로그인한 회원의 할 일 목록이 이미 있는지 반환한다.'''
         allTodos = self.load_todos()
         if session.getSignInedMemberId() in allTodos:
             return True
@@ -56,6 +57,7 @@ class TodoService:
 
 
     def run(self):
+        '''로그인 확인 후 할 일 메뉴를 반복 처리한다.'''
 
         if session.getSignInedMemberId() == '':
             print('Please SIGN-IN!!')
