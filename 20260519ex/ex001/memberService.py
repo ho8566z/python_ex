@@ -112,7 +112,7 @@ while flag:
                         print(f'로그인을 {MAX_SIGN_IN_TRY}회 실패했습니다.')
                         break
             else:
-                print(f'존재하지 않는 ID입니다.')
+                print('존재하지 않는 ID입니다.')
                 signInCount += 1
                 if signInCount >= MAX_SIGN_IN_TRY:
                     print(f'로그인을 {MAX_SIGN_IN_TRY}회 실패했습니다.')
@@ -136,7 +136,7 @@ while flag:
             else:
                 print('SIGN IN - FAIL')
         else:
-            print(f'존재하지 않는 ID입니다.')
+            print('존재하지 않는 ID입니다.')
 
     elif userSelectedMenuNum == PRINT_ALL_MEMBER_INFO:      #4.모든 회원정보 출력
         for key, value in members.items():
