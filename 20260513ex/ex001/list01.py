@@ -170,8 +170,8 @@ print(f'평균: {average:.2f}')    #평균: 49.17
 
 # 합격 여부
 if underSubject > 0 or average < 60:
-    print(f'다음 기회')
+    print('다음 기회')
 else:
-    print(f'합격')
+    print('합격')
 
 
