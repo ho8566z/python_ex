@@ -105,7 +105,7 @@ class MemberService:
 
         self.save_members(self.members)
 
-        print(f'MODIFY SUCCESS!!')
+        print('MODIFY SUCCESS!!')
 
         if root_config.DEV_MOD:
             print(f'self.load_members(): {self.load_members()}')
