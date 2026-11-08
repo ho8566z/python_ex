@@ -123,7 +123,7 @@ while flag:
         session.signInedMemberid = ''
 
     elif menuNum == config.DIARY_WRITE:
-        print(f'6.write')
+        print('6.write')
 
         if session.signInedMemberid == '':
             print('sorry, please sign-in')
@@ -138,7 +138,7 @@ while flag:
                     break
 
     elif menuNum == config.DIARY_READ:
-        print(f'7.read')
+        print('7.read')
 
         if session.signInedMemberid == '':
             print('sorry, please sign-in')
