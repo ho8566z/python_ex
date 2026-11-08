@@ -171,15 +171,15 @@ randomNumber = random.randrange(1, 101)
 cnt = 0
 
 while True:
-    userNumber = int(input(f'숫자 입력: '))
+    userNumber = int(input('숫자 입력: '))
     cnt += 1
 
     if userNumber == randomNumber:
-        print(f'정답')
+        print('정답')
         break
 
     elif cnt >= 10:
-        print(f'오답')
+        print('오답')
 
     elif userNumber < randomNumber:
         print(f'입력한 숫자: {userNumber}는 난수보다 작다')
