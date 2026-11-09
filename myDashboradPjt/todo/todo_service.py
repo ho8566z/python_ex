@@ -6,6 +6,7 @@ import json
 from util import util_time
 
 class TodoService:
+    '''로그인한 회원의 할 일을 작성·조회·수정·삭제하고 todos.json 에 저장하는 서비스 클래스.'''
     def __init__(self):
         self.todos = {}
         self.init_database()
