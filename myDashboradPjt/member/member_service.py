@@ -6,6 +6,7 @@ import json
 import session
 
 class MemberService:
+    '''회원 가입·로그인·정보 수정·삭제를 처리하고 members.json 에 저장하는 서비스 클래스.'''
     def __init__(self):
         self.members = {}
         self.init_database()
