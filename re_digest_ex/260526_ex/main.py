@@ -10,6 +10,8 @@ User : 가위
 '''
 
 # main.py : 실행 파일
+# 같은 폴더의 temp.py 를 import 하므로 이 폴더에서 `python main.py` 로 실행한다
+# 흐름: 사용자 선택 입력 -> 컴퓨터 난수 생성 -> 두 값을 비교해 결과 출력
 
 
 import temp     #함수를 담은 모듈 파일을 소환(import)한다
