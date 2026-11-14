@@ -1,3 +1,4 @@
+# 개발 모드 여부 (True 면 개발용 더미 데이터를 쓴다)
 DEV_MOD = True
 
 MEMBER_SERVICE  = 1
