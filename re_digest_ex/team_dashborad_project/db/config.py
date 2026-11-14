@@ -1,3 +1,4 @@
+# 회원 정보 키
 ID = "ID"
 PW = "PW"
 MAIL = "MAIL"
