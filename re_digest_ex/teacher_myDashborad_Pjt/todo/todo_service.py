@@ -7,11 +7,13 @@ from util import util_time
 
 class TodoService:
     def __init__(self):
+        """빈 할 일 저장소를 만들고 db/todos.json 파일을 준비한다."""
         self.todos = {}
         self.init_database()
 
 
     def init_database(self):
+        """db/todos.json 경로를 정하고, 파일이 없으면 새로 저장하고 있으면 읽어 온다."""
         # 현재 파일 위치
         BASE_PATH = os.path.dirname(os.path.abspath(__file__))
         print(f'BASE_PATH: {BASE_PATH}')
