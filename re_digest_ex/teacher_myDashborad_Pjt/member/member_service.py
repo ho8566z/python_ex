@@ -96,6 +96,7 @@ class MemberService:
 
     # 회원 정보수정 기능
     def modify(self):
+        '''로그인한 회원의 비밀번호·메일·전화번호를 새로 입력받아 수정한다.'''
         mPw = input('Input member PW :  ')
         mMail = input('Input member MAIL :  ')
         mPhone = input('Input member PHONE :  ')
@@ -118,6 +119,7 @@ class MemberService:
 
     # 회원 탈퇴 기능
     def delete(self):
+        '''확인을 받은 뒤 로그인한 회원을 삭제하고 로그아웃한다.'''
         confirm = input('정말 탈퇴하시겠습니까? [Y] or [N] :  ')
         if confirm == 'Y':
             self.members = self.load_members()
@@ -131,6 +133,7 @@ class MemberService:
 
 
     def run(self):
+        '''로그인 여부에 맞는 회원 메뉴를 반복 처리한다.'''
         flag = True
         while flag:
             if session.getSignInedMemberId() == '':
@@ -153,6 +156,7 @@ class MemberService:
 
 
     def init_database(self):
+        '''db/members.json 경로를 정하고, 파일이 없으면 새로 만들고 있으면 불러온다.'''
         
         # 현재 파일 위치
         BASE_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -178,11 +182,13 @@ class MemberService:
 
     # JSON 파일 저장
     def save_members(self, members):   # {}
+        '''회원 딕셔너리를 JSON 파일에 저장한다.'''
         with open(self.dbFile, 'w', encoding='utf-8') as f:
             json.dump(members, f, ensure_ascii=False, indent=4)
 
 
     def load_members(self):
+        '''JSON 파일에서 전체 회원 정보를 읽어 딕셔너리로 반환한다.'''
         with open(self.dbFile, 'r', encoding='utf-8') as f:
             return json.load(f)
 
