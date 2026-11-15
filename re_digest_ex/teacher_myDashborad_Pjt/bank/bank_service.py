@@ -88,12 +88,14 @@ class BankService:
 ##============================================================================================================#		
 
 	def findedAccounts(self):
+		'''계좌를 불러오고, 로그인한 회원 항목이 없으면 빈 딕셔너리로 만든다.'''
 		self.accounts = self.load_accounts()
 		if session.getSignInedMemberId() not in self.accounts:
 			self.accounts[session.getSignInedMemberId()] = {}
 
 
 	def createdUuidAcct(self):
+		'''잔액 0 의 새 계좌를 UUID 번호로 만든다.'''
 		self.myAccounts = self.accounts[session.getSignInedMemberId()]
 		self.myAccounts[str(uuid.uuid4())] = {
 			'balance': 0,
@@ -102,11 +104,13 @@ class BankService:
 
 
 	def checkedDev(self):
+		'''개발 모드일 때만 저장된 계좌 전체를 출력한다.'''
 		if root_config.DEV_MOD:
 			print(f'self.load_accounts(): {self.load_accounts()}')
 
 
 	def reportedAccounts(self):
+		'''계좌를 파일에 저장하고 개설 성공을 알린다.'''
 		self.save_accounts(self.accounts)
 		print('NEW-ACCOUNT SUCCESS!!')
 
@@ -114,6 +118,7 @@ class BankService:
 
 
 	def newAccount(self):
+		'''새 계좌를 개설해 저장하는 전체 흐름을 처리한다.'''
 		self.findedAccounts()
 		self.createdUuidAcct()
 		self.reportedAccounts()
