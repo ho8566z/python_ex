@@ -59,12 +59,14 @@ class BankService:
 ##============================================================================================================#	    
 
 	def replaceAccounts(self):
+		'''파일에서 계좌를 다시 읽어 로그인한 회원의 계좌만 myAccounts 에 담는다.'''
 		self.accounts = self.load_accounts()
 		self.myAccounts = self.accounts[session.getSignInedMemberId()]
 		print()
 						
 
 	def printedAcctList(self):
+		'''회원의 계좌별 잔액과 입금·출금 내역을 출력한다.'''
 		for idx, myAccount in enumerate(self.myAccounts.keys()):
 			print('==================================================================================\n')
 			print(f"[{idx+1}]: {myAccount}: {self.myAccounts[myAccount]['balance']}")
@@ -79,6 +81,7 @@ class BankService:
 		
 		
 	def accountList(self):
+		'''최신 계좌 정보를 불러와 계좌 목록을 출력한다.'''
 		self.replaceAccounts()
 		self.printedAcctList()
 
