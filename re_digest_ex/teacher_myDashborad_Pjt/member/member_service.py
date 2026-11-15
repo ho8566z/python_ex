@@ -6,17 +6,20 @@ import json
 import session
 
 class MemberService:
+    '''회원 가입·로그인·정보수정·탈퇴를 처리하고 members.json 에 저장하는 서비스 클래스.'''
     def __init__(self):
         self.members = {}
         self.init_database()
 
 
     def re_saveMembers(self):
+        '''현재 회원 딕셔너리를 JSON 파일에 다시 저장한다.'''
         self.save_members(self.members)
 
 
     # 회원 가입 기능
     def sign_up(self):
+        '''새 회원 정보를 입력받아 ID 중복이 없으면 저장한다.'''
         mId = input('Input new member ID :  ')
 
         # ID 중복체크를 할 때 self.members를 사용한다.
@@ -50,6 +53,7 @@ class MemberService:
 
     # 회원 로그인 기능
     def sign_in(self):
+        '''ID 와 비밀번호가 맞으면 세션에 로그인한 회원 ID 를 기록한다.'''
         mId = input('Input member ID :  ')
         mPw = input('Input member PW :  ')
 
@@ -85,6 +89,7 @@ class MemberService:
 
     # 회원 로그아웃 기능
     def sign_out(self):
+        '''세션의 로그인 정보를 비워 로그아웃한다.'''
         session.setSignInedMemberId()
         print('SIGN-OUT SUCCESS!!')
 
