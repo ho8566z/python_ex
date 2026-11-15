@@ -126,6 +126,7 @@ class BankService:
 ##============================================================================================================#	
 
 	def choosedDeposit(self):
+		'''입금할 계좌 번호를 올바르게 입력할 때까지 받고 입금 입력으로 넘긴다.'''
 		print('\n===My Accounts====================================================================')
 		for idx, account in enumerate(self.myAccounts.keys()):
 			print(f'[{idx+1}]: {account}')
@@ -147,6 +148,7 @@ class BankService:
 
 
 	def inputDeposit(self):
+		'''입금액과 내역을 입력받아 입금 기록을 만든다.'''
 		self.depositAmount = int(input('Enter deposit amount :  '))
 		self.depositHistory = input('Enter deposit history :  ')
 		self.deposit = {
@@ -160,6 +162,7 @@ class BankService:
 
 
 	def depositBalance(self):
+		'''선택한 계좌의 잔액을 늘리고 입금 내역을 맨 앞에 추가해 저장한다.'''
 		self.myAccounts[self.depositAccountNumber]['balance'] += self.depositAmount
 		self.myAccounts[self.depositAccountNumber]['histories'].insert(0, self.deposit)
 
@@ -170,6 +173,7 @@ class BankService:
 
 
 	def deposit(self):
+		'''최신 계좌를 불러와 입금 절차를 시작한다.'''
 		self.replaceAccounts()
 		self.choosedDeposit()
 
