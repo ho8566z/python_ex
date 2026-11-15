@@ -5,12 +5,14 @@ import os
 import json
 
 class MemoService:
+    '''로그인한 회원의 메모를 관리하고 memos.json 에 저장하는 서비스 클래스.'''
     def __init__(self):
         self.memos = {}
         self.init_database()
 
 
     def init_database(self):
+        '''db/memos.json 경로를 정하고, 파일이 없으면 새로 만들고 있으면 불러온다.'''
         # 현재 파일 위치
         BASE_PATH = os.path.dirname(os.path.abspath(__file__))
         print(f'BASE_PATH: {BASE_PATH}')
@@ -44,6 +46,7 @@ class MemoService:
     
 
     def isMyMemos(self):
+        '''로그인한 회원의 메모 목록이 이미 있는지 반환한다.'''
         allMemos = self.load_memos()
         if session.getSignInedMemberId() in allMemos:
             return True
@@ -53,20 +56,24 @@ class MemoService:
 ##============================================================================================================#
     
     def replaceMemo(self):
+        '''파일에서 메모를 다시 읽어 로그인한 회원의 메모만 myMemos 에 담는다.'''
         self.memos = self.load_memos()
         self.myMemos = self.memos[session.getSignInedMemberId()]
 
         
     def checkedDev(self):
+        '''개발 모드일 때만 저장된 메모 전체를 출력한다.'''
         if root_config.DEV_MOD:
             print(f'self.load_memos: {self.load_memos()}')
 
 
     def re_saveMemo(self):
+        '''현재 메모 딕셔너리를 JSON 파일에 다시 저장한다.'''
         self.save_memos(self.memos)
 
 
     def inputMemoWrite(self):        
+        '''새 메모를 입력받아 목록 맨 앞에 추가하고 저장한다.'''
         newMemo = input('Write new memo :  ')
 
         self.replaceMemo()
