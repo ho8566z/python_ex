@@ -180,6 +180,7 @@ class BankService:
 ##============================================================================================================#	
 
 	def choosedWithdrawal(self):
+		'''출금할 계좌 번호를 올바르게 입력할 때까지 받고 출금 입력으로 넘긴다.'''
 		print('\n===My Accounts====================================')
 		for idx, account in enumerate(self.myAccounts.keys()):
 			print(f'[{idx+1}]: {account}')
@@ -201,6 +202,7 @@ class BankService:
 
 
 	def inputWithdrawal(self):
+		'''출금액과 내역을 입력받아 출금 기록을 만든다.'''
 		self.withdrawalAmount = int(input('Enter withdrawal amount :  '))
 		self.withdrawalHistory = input('Enter withdrawal history :  ')
 		self.withdrawal = {
@@ -214,6 +216,7 @@ class BankService:
 
 
 	def zeroInput(self):
+		'''잔액이 부족하면 오류를 알리고, 충분하면 잔액을 줄이고 출금 내역을 저장한다.'''
 		if self.withdrawalAmount > self.myAccounts[self.withdrawalAccountNumber]['balance']:
 			print('ERROR! CHECK BALANCE!!')
 			return
@@ -228,11 +231,13 @@ class BankService:
 
 
 	def withdrawal(self):
+		'''최신 계좌를 불러와 출금 절차를 시작한다.'''
 		self.replaceAccounts()
 		self.choosedWithdrawal()
 
 
 	def run(self):
+		'''로그인 확인 후 계좌 목록·개설·입금·출금 메뉴를 반복 처리한다.'''
 
 		if session.getSignInedMemberId() == '':
 			print('Please SIGN-IN!!')
