@@ -72,6 +72,7 @@ class TodoService:
 
 
     def inputTodoWrite(self):
+        """내용과 만료일을 입력받아 새 할 일을 목록 맨 앞에 추가하고 저장한다."""
         self.replaceTodo()
         tText = input('Input new todo txt :  ')
         tExpDate = input('Input todo expiration date(ex: 2026-06-02 09:05:05) :  ')
@@ -114,6 +115,7 @@ class TodoService:
 ##============================================================================================================#
 
     def inputTodoUpdate(self):
+        """번호를 골라 내용과 만료일을 고치고 수정일을 갱신해 저장한다. 등록일과 완료 여부는 유지한다."""
         self.replaceTodo()
         for idx, myTodo in enumerate(self.myTodos):
             print('==================================================================================\n')
@@ -164,6 +166,7 @@ class TodoService:
 ##============================================================================================================#
 
     def checkingTodo(self):
+        """번호를 골라 해당 할 일의 완료 여부를 반대로 바꾸고 저장한다."""
         self.replaceTodo()
         for idx, myTodo in enumerate(self.myTodos):
             print('==================================================================================\n')
