@@ -48,6 +48,7 @@ class TodoService:
         
 
     def isMyTodos(self):
+        """로그인한 회원의 할 일 목록이 파일에 이미 있는지 반환한다."""
         allTodos = self.load_todos()
         if session.getSignInedMemberId() in allTodos:
             return True
@@ -58,6 +59,7 @@ class TodoService:
 ##============================================================================================================#
 			
     def replaceTodo(self):
+        """파일의 최신 할 일을 읽어 로그인한 회원의 목록myTodos으로 갈아 끼운다."""
         self.todos = self.load_todos()
         self.myTodos = self.todos[session.getSignInedMemberId()]
                     
@@ -68,6 +70,7 @@ class TodoService:
             
 
     def re_saveTodo(self):
+        """메모리의 할 일 전체를 파일에 다시 저장한다."""
         self.save_todos(self.todos)
 
 
