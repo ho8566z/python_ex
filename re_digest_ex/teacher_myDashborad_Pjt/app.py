@@ -6,6 +6,7 @@ from todo import todo_service
 
 # 메뉴 번호에 맞는 서비스를 골라 실행하는 진입 함수
 def main():
+    '''메뉴 번호에 맞는 서비스를 실행하고, 종료 번호가 입력되면 반복을 멈춘다.'''
     flag = True
     while flag:
         menuNum = int(input('1.MEMBER    2.BANK    3.MEMO    4.TODO    99.SYSTEM-OUT :  '))
