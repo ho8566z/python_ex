@@ -129,6 +129,7 @@ class MemoService:
 ##============================================================================================================#	  
 
     def selectedMemoDelete(self):
+        '''삭제할 메모 번호를 입력받아 해당 메모를 지우고 저장한다.'''
         self.replaceMemo()
         for idx, memo in enumerate(self.myMemos):
             print(f'[{idx+1}] {memo}')
@@ -141,10 +142,12 @@ class MemoService:
             
 
     def memoDelete(self):
+        '''메모 삭제 입력 흐름을 실행한다.'''
         self.selectedMemoDelete()
         
 ##============================================================================================================#	  				
     def run(self):
+            '''로그인 확인 후 메모 작성·조회·수정·삭제 메뉴를 반복 처리한다.'''
 
             if session.getSignInedMemberId() == '':
                 print('Please SIGN-IN!!')
