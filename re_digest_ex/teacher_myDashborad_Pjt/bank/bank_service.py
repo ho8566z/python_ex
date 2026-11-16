@@ -9,6 +9,7 @@ from util import util_time
 class BankService:
 	'''로그인한 회원의 계좌를 관리하고 accounts.json 에 저장하는 서비스 클래스.'''
 	def __init__(self):
+		'''계좌 딕셔너리를 비우고 저장 파일(accounts.json)을 준비한다.'''
 		self.accounts = {}
 		self.init_database()
 
