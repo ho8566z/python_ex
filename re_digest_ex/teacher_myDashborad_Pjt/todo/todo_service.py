@@ -6,6 +6,7 @@ import json
 from util import util_time
 
 class TodoService:
+    '''로그인한 회원의 할 일을 작성·조회·수정·삭제하고 todos.json 에 저장하는 서비스 클래스.'''
     def __init__(self):
         """빈 할 일 저장소를 만들고 db/todos.json 파일을 준비한다."""
         self.todos = {}
@@ -65,6 +66,7 @@ class TodoService:
                     
 
     def checkedDev(self):                
+        '''개발 모드일 때만 현재 파일에 저장된 할 일 전체를 출력한다.'''
         if root_config.DEV_MOD:
             print(f'self.load_todos: {self.load_todos()}')
             
@@ -96,11 +98,13 @@ class TodoService:
                         
             
     def todoWrite(self):
+        '''할 일 작성 입력 흐름을 실행한다.'''
         self.inputTodoWrite()
 
 ##============================================================================================================#
 
     def todoReading(self):
+        '''로그인한 회원의 할 일 목록을 번호와 함께 모두 출력한다.'''
         self.replaceTodo()
         for idx, myTodo in enumerate(self.myTodos):
             print('==================================================================================\n')
