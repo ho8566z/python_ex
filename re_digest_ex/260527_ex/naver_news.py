@@ -8,6 +8,7 @@ es.client_secret            #naverClawler413 - client_secret
 
 # NAVER에서 데이터를 가져오는 역할함수
 def getRequestUrl(url):                 #client에서 server로 'url'을 가져오기 위한 역할함수
+    '''네이버 API에 URL을 요청해 응답 본문을 문자열로 반환한다. 실패하면 None을 반환한다.'''
     req = urllib.request.Request(url)   #client에서 urllib을 통해 server로 데이터(url)을 요청하는 부분 
     req.add_header('X-Naver-Client-Id', es.client_id)          #요청할 때, 필요한 정보를 채우는 부분(= id)
     req.add_header('X-Naver-Client-Secret', es.client_secret)  #요청할 때, 필요한 정보를 채우는 부분(= pw)
@@ -29,6 +30,7 @@ def getRequestUrl(url):                 #client에서 server로 'url'을 가져�
 
 # NAVER에서 데이터 검색하는 역할함수
 def getNaverSearch(node, srcText, start, display):  
+    '''검색 종류·검색어·시작 위치·개수로 네이버 검색 API를 호출해 JSON 결과를 반환한다.'''
     #naver에서 search해서 get해라(node(:어디서), srcText(:입력받은 검색어), start(:시작 위치), display(:가져올 데이터 개수))
     base = 'https://openapi.naver.com/v1/search'    
     #base(:위치) = 'https://openapi.naver.com(:주소)/v1(:출입구 번호)/search(:출입구 데스크 위치)'
@@ -50,6 +52,7 @@ def getNaverSearch(node, srcText, start, display):
 
 
 def getPostData(post, jsonResult, cnt):     #통신받은(:post) 데이터(:data)를 get해라
+    '''검색 결과 한 건에서 제목·설명·링크·발행일을 뽑아 결과 리스트에 추가한다.'''
     title = post['title']                   #'뉴스_제목'은 통신받은 데이터에서 'title'이다
     description = post['description']       #'뉴스_설명'은 통신받은 데이터에서 'description'이다
     org_link = post['originallink']         #'(원래의)뉴스사_주소'는 통신받은 데이터에서 'originallink'이다
@@ -72,6 +75,7 @@ def getPostData(post, jsonResult, cnt):     #통신받은(:post) 데이터(:data
 
 
 def main():         #실행 파일 대신에
+    '''검색어를 입력받아 네이버 뉴스를 검색하고 결과를 파일로 저장하는 진입 함수.'''
     node = 'news'   #'크롤링'하는 대상을 지정
     srcText = input('검색어 입력: ')    #검색하고 싶은 Text입력받아 srcText에 할당하는
     cnt = 0         #데이터를 몇번 응답 받을건지에 대한 count함수 값을 0으로
