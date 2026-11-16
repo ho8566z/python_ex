@@ -1,6 +1,7 @@
 from our_dice import Dice
 
 def sortNumbers(*numbers):
+    '''숫자 여러 개를 받아 큰 수부터 정렬한 리스트를 반환한다.'''
     list = sorted(numbers)
     list.sort(reverse=True)
     return list
