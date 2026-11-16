@@ -52,8 +52,8 @@ class BankService:
 
     def isMyAccount(self):
         '''로그인한 회원의 계좌가 하나라도 있는지 반환한다.'''
-        allAcccounts = self.load_accounts()
-        if session.getSignInedMemberId() in allAcccounts:
+        allAccounts = self.load_accounts()
+        if session.getSignInedMemberId() in allAccounts:
             return True
         
         return False
