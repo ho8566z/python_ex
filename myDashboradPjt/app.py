@@ -5,6 +5,7 @@ from memo import memo_service
 from todo import todo_service
 
 def main():
+    '''메인 메뉴를 반복해서 보여 주고, 고른 번호의 서비스를 실행한다. 99를 입력하면 종료한다.'''
     flag = True
     # 99(SYSTEM-OUT)가 입력될 때까지 메뉴를 반복해서 보여준다
     while flag:
