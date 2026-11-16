@@ -4,6 +4,7 @@ class Dice:
     '''주사위를 굴린 결과를 모아 두는 클래스.'''
 
     def __init__(self):
+        '''주사위에서 나온 숫자를 담을 빈 리스트를 만든다.'''
         self.numbers = []
 
     def playDice(self):
