@@ -5,6 +5,7 @@ import json
 SERVICE_KEY = '1fac12c20ae2a975376bc2dedd43773c22483d8f7be8953e009f33d65a5efb06'
 
 def getRequestURL(url):
+    '''URL 로 요청해 성공(200)이면 응답 본문 문자열을, 실패하면 None 을 돌려준다.'''
     req = urllib.request.Request(url)
 
     try:
@@ -20,6 +21,7 @@ def getRequestURL(url):
 
 
 def getTourismStatesItem(yyyymm, nat_cd, ed_cd):
+    '''연월(yyyymm)·국가 코드·출입 구분으로 출입국 관광통계 API 를 호출해 JSON 을 돌려준다. 실패하면 None.'''
     serviceURL = 'http://openapi.tour.go.kr/openapi/service/EdrcntTourismStatsService/getEdrcntTourismStatsList'
 
     paraneters = "?"
@@ -40,6 +42,7 @@ def getTourismStatesItem(yyyymm, nat_cd, ed_cd):
 
 
 def getTourismStateService(nat_cd, ed_cd, nStartYear, nEndYear):
+    '''시작 연도부터 끝 연도까지 월별 통계를 모아 (결과 목록, 국가명, 출입 구분, 마지막 연월) 을 돌려준다.'''
 
     jsonResult = []
     result = []
@@ -78,6 +81,7 @@ def getTourismStateService(nat_cd, ed_cd, nStartYear, nEndYear):
 
 
 def main():
+    '''국가 코드와 조회 기간을 입력받아 입국자 통계를 조회하는 프로그램의 시작점.'''
 
     jsonResult = []
     natName = ''
