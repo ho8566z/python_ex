@@ -7,6 +7,7 @@ import json
 class MemoService:
     '''로그인한 회원의 메모를 관리하고 memos.json 에 저장하는 서비스 클래스.'''
     def __init__(self):
+        '''메모 저장소를 비우고 데이터베이스를 초기화한다.'''
         self.memos = {}
         self.init_database()
 
