@@ -19,20 +19,25 @@ randNums = 0            #com이 발생시킬 난수의 수를 0으로 정리한 
 collects = []           #user의 정수와 com의 난수를 비교하는 []리스트
 
 def setUSelecNumbers(ns):       #함수: set(:설정한다)U(:user)Selec(:선택)Numbers(:정수를)(ns(:매개변수))
+    '''사용자가 고른 값 목록을 저장한다.'''
     global userSelectedNums     #전역변수 userSelectedNums를 지역변수로서 사용 가능하도록
     userSelectedNums = ns       #userSelectedNums에 매개변수ns를 할당받는
 
 def getUSelecNumbers():         #함수: get(:얻는다)U(:user)Selec(:선택)Numbers(:정수를)
+    '''저장된 사용자 선택 값을 돌려준다.'''
     return userSelectedNums     #userSelectedNums를 return한다
 
 def setRNumbers():              #함수: set(:설정한다)R(:랜덤)Numbers(:난수를)
+    '''컴퓨터의 선택으로 0~2 중 하나를 무작위로 뽑아 저장한다.'''
     global randNums             #전역변수 randNums를 지역변수로서 사용 가능하도록
     randNums = random.randrange(3)      #randNums에 랜덤.랜덤범위(3까지)를 할당한다
 
 def getRNumbers():              #함수: get(:얻는다)R(:랜덤)Numbers(:난수를)
+    '''저장된 컴퓨터의 선택 값을 돌려준다.'''
     return randNums             #getRNumbers를 return한다
 
 def compareNumbers():           #함수: compare(:비교한다)Numbers(:정수와 난수를)
+    '''사용자 선택과 컴퓨터 선택을 비교해 비김/이김/짐 결과를 만든다.'''
     global userSelectedNums     #전역변수 userSelectedNums를 지역변수로서 사용 가능하도록
     global randNums             #전역변수 randNums를 지역변수로서 사용 가능하도록
     global collects             #전역변수 collects를 지역변수로서 사용 가능하도록
