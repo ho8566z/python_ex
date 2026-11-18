@@ -19,20 +19,25 @@ randNums = 0
 collects = []
 
 def setUSelecNumbers(ns):
+    '''사용자가 고른 값 목록을 저장한다.'''
     global userSelectedNums
     userSelectedNums = ns
 
 def getUSelecNumbers():
+    '''저장된 사용자 선택 값을 돌려준다.'''
     return userSelectedNums
 
 def setRNumbers():
+    '''컴퓨터의 선택으로 0~2 중 하나를 무작위로 뽑아 저장한다.'''
     global randNums
     randNums = random.randrange(3)
 
 def getRNumbers():
+    '''저장된 컴퓨터의 선택 값을 돌려준다.'''
     return randNums
 
 def compareNumbers():
+    '''사용자 선택과 컴퓨터 선택을 비교해 비김/이김/짐 결과를 만든다.'''
     global userSelectedNums
     global randNums
     global collects
