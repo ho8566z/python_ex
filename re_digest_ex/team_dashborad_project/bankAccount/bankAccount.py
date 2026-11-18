@@ -22,6 +22,7 @@ accountBalance = 0      #'계좌 잔액' 데이터에 입출 내역에 따라 �
 
 
 def fastBalance():          #함수: fast(과거의), balance(잔액) = 과거의 잔액을 확인하는
+    '''로그인한 회원 계좌의 입출금 기록을 합산해 현재 잔액을 구한다.'''
     global accountBalance   #전역변수 accountBalance를 지역변수로서 사용 가능하도록
     accountBalance = 0      #'계좌 잔액' 데이터에 입출 내역에 따라 데이터를 기록하기 전에 '0'으로 할당
     accountNumber = dbManager.members[session.signinedId]["BANK_ACNT"]
@@ -42,6 +43,7 @@ def fastBalance():          #함수: fast(과거의), balance(잔액) = 과거�
 
 
 def setBankAccount(id):     #함수: set(설정)힌다, bank(은행)의 account(계좌)를 = 은행계좌를 설정히는 함수
+    '''계좌 비밀번호(숫자)를 입력받아 회원의 계좌를 만들고 계좌번호를 출력한다.'''
     inputAccountPw = input("계좌 비밀번호 입력: ")
     #변수명: '입력받은 계좌 비밀번호'에, '계좌번호 비밀번호'를 입력받아 할당한다
     
@@ -60,6 +62,7 @@ def setBankAccount(id):     #함수: set(설정)힌다, bank(은행)의 account(
 
 
 def calculateMoney(kind):           #함수: calculate(계산)한다, money(돈)을
+    '''입금 또는 출금 금액을 입력받아 잔액에 반영한다. 입력이 잘못되면 None 을 돌려준다.'''
     global accountBalance   #전역변수 accountBalance를 지역변수로서 사용 가능하도록
     inputMoney = input(f"입금 및 출금할 금액을 입력하세요: ")
     #'입력받은 금액'에 '입금 및 출금할 금액'를 입력받아 할당한다
@@ -87,6 +90,7 @@ def calculateMoney(kind):           #함수: calculate(계산)한다, money(돈)
 
 
 def moneyFlow():        #함수명: money(돈)의 flow(흐름)
+    '''로그인한 회원 계좌의 거래 내역을 출력한다.'''
     global accountBalance   #전역변수 accountBalance를 지역변수로서 사용 가능하도록
     accountNumber = dbManager.members[session.signinedId]["BANK_ACNT"]
     #변수명: '계좌번호'에, 모듈: dbManager의 members(회원들)에서 'session.signinedId(로그인 상태일때), 
@@ -118,6 +122,7 @@ def moneyFlow():        #함수명: money(돈)의 flow(흐름)
 
 
 def setMoneyFlow():     #함수: set한다, money의 flow를 = '돈의 흐름을 선택한다'
+    '''입출금·내역 조회 메뉴를 종료 입력 전까지 반복한다.'''
     global flag         #전역변수 flag를 지역변수로서 사용 가능하도록
     while flag:         #flag변수가 True인 동안, while(반복)한다
         inputData = input("메뉴를 선택하세요, 1.입금 및 출금    2.내역    99.종료")
@@ -154,6 +159,7 @@ def setMoneyFlow():     #함수: set한다, money의 flow를 = '돈의 흐름을
 
 
 def startLoop():                #함수: start한다, loop(루프)를
+    '''로그인 상태를 확인한 뒤 잔액을 보여 주고 계좌 메뉴를 시작한다.'''
     global flag                 #전역변수 flag를 지역변수로서 사용 가능하도록
 
     if session.onSignIned():    #만약에, 로그인 상태를 확인했을 때, 로그인 중이라면,
