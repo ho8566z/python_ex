@@ -5,6 +5,7 @@ from memoService import memo          # 메모에 적용하기 위해서
 
 
 def writeMemoUI():    # 메모 작성 창을 띄우기 위한 함수
+    '''tkinter 창에 메모 입력칸과 저장 버튼을 만들어 보여 준다.'''
 
     writeWindow = tk.Tk()   #창모양을 담는 함수
 
@@ -15,6 +16,7 @@ def writeMemoUI():    # 메모 작성 창을 띄우기 위한 함수
     textBox.pack(pady=10)  # 그 제목안에 여백을 얼마나 넣을것인지
 
     def saveMemo():   # 버튼 실행 함수
+        '''입력칸의 내용을 읽어 로그인한 회원의 메모로 저장한다. 로그인하지 않았으면 저장하지 않는다.'''
 
         text = textBox.get("1.0", tk.END).strip()  # 입력칸에 적은 내용가져오는 코드
         # textBox.get() 박스 크기 안에 글자를 가져온다.(첫번째 줄, 0번째 글자)
