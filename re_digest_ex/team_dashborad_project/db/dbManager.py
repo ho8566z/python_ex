@@ -9,6 +9,7 @@ import datetime
 
 # ------ member ------
 def createMember(id, pw, mail, phone):
+    '''회원 정보를 저장하고, 그 회원의 메모·체크리스트 목록을 빈 상태로 만든다.'''
     members[id] = {
         config.ID: id,
         config.PW: pw,
@@ -35,12 +36,14 @@ def getMemberPw(id):
 
 # ------ bank ------
 def getMemberBankAcnt(id):      
+    '''회원의 계좌번호를 돌려준다. 계좌가 없으면 None.'''
     #함수명: 'get한다, member(회원의) bank(은행) acnt(계좌)를'
     return members[id][config.BANK_ACNT]    
     #members(회원목록)을 [id]와 [모듈 connfig의 BANK_ACNT(은행_계좌)]를 통해서
 
 
 def createBankAccount(id, pw):
+    '''회원 id 로 계좌번호(101-77-id)를 만들고 비밀번호와 빈 거래 내역을 저장한다.'''
     #함수명: 'create(만든다), bank(은행) account(계좌)를' 
     #= 은행 계좌를 만드는 함수를 회원id와 pw를 매개변수로서 실행한다 ->//
     #//-> 함수: created(만든다) flow(흐름)의 history(역사)를 (id, pw데이터를 매개변수로서)
@@ -59,6 +62,7 @@ def createBankAccount(id, pw):
     #members(회원목록)의 [id]에 [모듈: config에 "은행_계좌"]에 '계정 번호'를 할당한다
 
 def createdFlowHistory(id, inputMoney, kind):       
+    '''현재 시각과 금액, 입금/출금 구분을 회원 계좌의 거래 내역에 추가한다.'''
     #함수명: 'created(만든다), flow(흐름) history(역사를)'에 'id(회원id)', 
     # 'inputMoney(입력받은 금액)', 'kind(입/출 종류)'를 매개변수로서 데이터를 받는다
     if members[id][config.BANK_ACNT] not in bankAccounts:
@@ -82,24 +86,29 @@ def getMemoList(id):
 
 
 def hasMemo(id):
+    '''회원에게 저장된 메모가 하나라도 있으면 True 를 돌려준다.'''
     return id in memos and len(memos[id]) > 0
 
 def createMemo(id, text):
+    '''현재 시각과 내용으로 새 메모를 회원의 메모 목록에 추가한다.'''
     time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     memo = {config.MEMO_DATE: time, config.MEMO_TEXT: text}
 
     memos[id].append(memo)
 
 def updateMemo(id, num, newText):
+    '''num 번째 메모의 내용을 바꾸고 작성 시각을 현재로 갱신한다.'''
     memos[id][num][config.MEMO_TEXT] = newText
     memos[id][num][config.MEMO_DATE] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 def deleteMemo(id, num):
+    '''num 번째 메모를 삭제한다.'''
     del memos[id][num]
 
     
 # ------ todolist ------
 def createTodo(id, workNote, finishDay):
+    '''마감까지 남은 일수로 마감 시각을 계산해 체크리스트 항목을 회원 목록에 추가한다.'''
     now = datetime.datetime.now()
     expired_time = now + datetime.timedelta(days=finishDay)
 
