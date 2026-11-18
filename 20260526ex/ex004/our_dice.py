@@ -1,3 +1,4 @@
+'''주사위를 굴려 나온 숫자를 모으고 합계를 구하는 Dice 클래스 모듈.'''
 import random
 
 class Dice:
