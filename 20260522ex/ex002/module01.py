@@ -1,4 +1,5 @@
 def fun():
+    '''module01 의 함수가 실행됐음을 출력한다.'''
     print('module01의 함수 실행')
 
 # fun()
