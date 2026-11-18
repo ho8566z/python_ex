@@ -7,9 +7,11 @@ import datetime         # 시간
 
 
 def getLoginId():
+    '''현재 로그인한 회원의 아이디를 돌려준다.'''
     return session.signinedId
 
 def printMemoList(id):
+    '''회원의 메모를 번호, 작성 날짜, 내용과 함께 출력한다.'''
     memoList = dbManager.getMemoList(id)
 
     for idx, memo in enumerate(memoList):
@@ -18,6 +20,7 @@ def printMemoList(id):
         print(f'내용: {memo[config.MEMO_TEXT]}')
 
 def inputMemoNumber(id, text):
+    '''메모 번호를 입력받아 목록 범위 안이면 0부터 시작하는 인덱스로 돌려준다. 잘못된 입력이면 None.'''
     num = input(text)
         
     if not num.isdigit():
@@ -35,6 +38,7 @@ def inputMemoNumber(id, text):
     return num
 
 def writeMemo():        # 메모에 저장할 함수
+    '''메모 내용을 입력받아 현재 회원의 메모로 저장한다.'''
     id = getLoginId()   # 현재 로그인 가져오기
 
     memoText = input('메모 입력: ')
@@ -43,6 +47,7 @@ def writeMemo():        # 메모에 저장할 함수
 
 
 def readMemo():       # 그동안 등록한 메모 출력하는 함수
+    '''저장된 메모를 모두 출력한다. 메모가 없으면 안내만 한다.'''
     id = getLoginId()     # 똑같이 현재 아이디 가져오기
 
     # 메모가 있는지 체크해서 없으면 없다고 알려주기
@@ -56,6 +61,7 @@ def readMemo():       # 그동안 등록한 메모 출력하는 함수
 
 
 def updateMemo():      # 기존 메모를 수정해줄 함수
+    '''번호를 고른 메모의 내용을 새로 입력받은 내용으로 바꾼다.'''
     id = getLoginId()
 
     if not dbManager.hasMemo(id):
@@ -77,6 +83,7 @@ def updateMemo():      # 기존 메모를 수정해줄 함수
 
 
 def deleteMemo():     # 말 그대로 삭제하는 함수
+    '''번호를 고른 메모를 삭제한다.'''
     id = getLoginId()
 
     if not dbManager.hasMemo(id):
@@ -96,6 +103,7 @@ def deleteMemo():     # 말 그대로 삭제하는 함수
 
 
 def searchMemo():      # 키워드를 찾기위한 함수
+    '''키워드를 입력받아 내용에 키워드가 들어 있는 메모를 찾아 출력한다.'''
     id = getLoginId()
 
     if not dbManager.hasMemo(id):
@@ -119,6 +127,7 @@ def searchMemo():      # 키워드를 찾기위한 함수
         print('검색 결과가 없습니다.')
 
 def memoLoop():
+    '''메모 메뉴(작성·조회·수정·삭제·검색)를 종료 입력 전까지 반복한다.'''
     while True:
         print("\n===== 메모 메뉴 =====")
         print("1. 메모 작성")
