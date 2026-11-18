@@ -1,5 +1,6 @@
 # import 되면 모듈 이름이, 직접 실행하면 '__main__' 이 __name__ 에 담긴다.
 def fun():
+    '''module02 의 함수가 실행됐음을 출력한다.'''
     print('module02의 함수 실행')
 
 fun()
