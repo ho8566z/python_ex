@@ -14,6 +14,7 @@ from memberService import session
 # [CREATE] 1. 새로운 할 일 등록 함수
 # ----------------------------------------------------
 def create_todo():
+    '''체크리스트 내용과 마감까지 남은 일수(0~30)를 입력받아 현재 회원의 목록에 추가한다.'''
     workNote = input('체크리스트를 작성하세요: ')
     now = datetime.datetime.now()
     
@@ -58,6 +59,7 @@ def create_todo():
 # [READ] 2. 목록 출력 함수 (만료 여부 실시간 계산)
 # ----------------------------------------------------
 def read_todo_list():
+    '''현재 회원의 체크리스트를 완료 여부와 함께 출력한다. 목록이 없으면 False 를 돌려준다.'''
     print('\n' + '-' * 20)
     print('----[나의 체크리스트 목록 조회]----')
     print('-' * 20)
@@ -87,6 +89,7 @@ def read_todo_list():
 # [UPDATE] 3. 완료 처리 함수
 # ----------------------------------------------------
 def update_todo_status():
+    '''번호를 입력받아 해당 체크리스트를 완료 상태로 바꾼다.'''
     checkChangeNum = (input('완료처리할 체크리스트의 번호를 입력하세요: '))
     if checkChangeNum.isdigit():
         checkChangeNum = int(checkChangeNum)
@@ -106,6 +109,7 @@ def update_todo_status():
 # [CHANGE] 4. 할 일 내용 수정 함수
 # ----------------------------------------------------
 def change_todo_text():
+    '''번호를 입력받아 해당 체크리스트의 내용을 새 내용으로 바꾼다.'''
     checkChangeNum = (input('수정할 체크리스트의 번호를 입력하세요: '))
     if checkChangeNum.isdigit():
         checkChangeNum = int(checkChangeNum)
@@ -127,6 +131,7 @@ def change_todo_text():
 # [DELETE] 5. 할 일 삭제 함수
 # ----------------------------------------------------
 def delete_todo():
+    '''번호를 입력받아 해당 체크리스트를 삭제한다.'''
     checkChangeNum = (input('삭제할 할 일의 번호를 입력하세요: '))
     if checkChangeNum.isdigit():
         checkChangeNum = int(checkChangeNum)
@@ -147,6 +152,7 @@ def delete_todo():
 # ----------------------------------------------------
 
 def handleRead():
+    '''목록을 조회한 뒤 완료 처리·내용 변경·삭제 중 하나를 고르게 한다.'''
     if read_todo_list():
 
         changeInfo = input('1.완료처리   2.내용수정   3.삭제   99.이전 메뉴로 이동\n관리 선택: ')
@@ -163,6 +169,7 @@ def handleRead():
             print('올바른 관리 번호를 선택해주세요.')
 
 def startLoop():
+    '''체크리스트 프로그램의 메인 메뉴를 종료 입력 전까지 반복한다.'''
     print('Todo List 프로그램에 오신 것을 환영합니다 ')
     
     while True:
