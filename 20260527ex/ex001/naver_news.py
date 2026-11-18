@@ -8,6 +8,7 @@ es.client_secret
 
 # NAVER에서 데이터를 가져오는 역할함수
 def getRequestUrl(url):
+    '''네이버 API 헤더를 붙여 요청하고, 성공(200)이면 응답 본문 문자열을, 실패하면 None 을 돌려준다.'''
     req = urllib.request.Request(url)
     req.add_header('X-Naver-Client-Id', es.client_id)
     req.add_header('X-Naver-Client-Secret', es.client_secret)
@@ -27,6 +28,7 @@ def getRequestUrl(url):
 
 # NAVER에서 데이터 검색하는 역할함수
 def getNaverSearch(node, srcText, start, display):
+    '''검색 종류(node)와 검색어로 네이버 검색 API 를 호출해 JSON 결과(dict)를 돌려준다. 실패하면 None.'''
     base = 'https://openapi.naver.com/v1/search'
     node = f'/{node}.json'   #=>news.json
     parameters = f'?query={urllib.parse.quote(srcText)}&start={start}&display={display}'
