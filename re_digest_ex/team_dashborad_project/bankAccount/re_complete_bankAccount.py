@@ -20,6 +20,7 @@ accountBalance = 0      #'계좌 잔액' 데이터에 입출 내역에 따라 �
 
 
 def startLoop():                #함수: start한다, loop(루프)를
+    '''로그인 상태를 확인하고 계좌번호가 있으면 입출금 메뉴를, 없으면 계좌 생성을 시작한다.'''
     if session.onSignIned:      #1번째 만약에, 로그인 상태를 확인했을 때, 로그인 중이라면
         if config.BANK_ACNT:    #2번째 만약에, (모듈)은행 계좌번호가 있다면
             setMoneyFlow()      #'set한다, money의 flow를' 함수를 실행한다
@@ -34,6 +35,7 @@ def startLoop():                #함수: start한다, loop(루프)를
 
 
 def setBankAccount():           #함수: set한다, bank의 account를
+    '''계좌번호(101-77-id)를 정하고 숫자 계좌 비밀번호를 입력받아 저장한다.'''
     fixedNumber = '101-77'      #고정 번호는 '101-77'이다
     userAccount = 'id'          #사용자 번호는 '회원id'이다
     bankAccount = f'{fixedNumber}-{userAccount}'    
@@ -62,6 +64,7 @@ def setBankAccount():           #함수: set한다, bank의 account를
 
 
 def addMoney():                 #함수: add한다, money를
+    '''입금액을 입력받아 잔액에 더하고 거래 내역에 기록한다. 0 이하는 거부한다.'''
     global accountBalance       #전역변수 accountBalance를 지역변수로서 사용 가능하도록
 
     try:        #시도해라
@@ -90,6 +93,7 @@ def addMoney():                 #함수: add한다, money를
 
 
 def subMoney():                 #함수: sub한다, money를
+    '''출금액을 입력받아 잔액에서 빼고 거래 내역에 기록한다. 0 이하이거나 잔액보다 크면 거부한다.'''
     global accountBalance       #전역변수 accountBalance를 지역변수로서 사용 가능하도록
     try:        #시도해라
         minus = int(input('금액을 입력하세요, 출금 금액: '))    #'빼기'는 input되어 int로 캐스팅된 '출금할 금액'이다
@@ -122,6 +126,7 @@ def subMoney():                 #함수: sub한다, money를
 
 
 def moneyFlow():        #함수: money의 flow(흐름)은
+    '''거래 내역을 최신순으로 복사해 조회 시각과 함께 출력한다.'''
     global accountBalance       #전역변수 accountBalance를 지역변수로서 사용 가능하도록
     myMoneyFlow = backAccountDb.bankAccountDb[config.BANK_ACNT][config.BANK_ACNT][config.BANK_LOG]
     #'나의 money의 flow'에 (파일)은행계좌 데이터베이스.(딕셔너리)은행계좌 데이터베이스.[(모듈)은행 계좌번호]
@@ -144,6 +149,7 @@ def moneyFlow():        #함수: money의 flow(흐름)은
 
 
 def saveJson():     #함수: save해라, json형식의 파일을
+    '''계좌번호·현재 잔액·거래 내역을 시각이 붙은 JSON 파일로 저장한다.'''
     now = datetime.datetime.now().strftime('%Y-%m-%d %H-%M-%S')
     #'지금'은 '(모듈)날짜.지금날짜.지금()'을 문자열로 바꿔라, 
     # '%Y-%m-%d %H-%M-%S(2026-05-28 22-22-16)'의 형식으로
@@ -165,6 +171,7 @@ def saveJson():     #함수: save해라, json형식의 파일을
     
 
 def setMoneyFlow():     #함수: set한다, money의 flow를
+    '''입금·출금·내역 조회 메뉴를 종료 입력 전까지 반복한다.'''
     global flag       #전역변수 flag를 지역변수로서 사용 가능하도록
     while flag:         #flag변수가 True일때 동안에
         try:        #시도해라
