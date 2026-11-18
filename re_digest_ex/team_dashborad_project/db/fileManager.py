@@ -40,6 +40,7 @@ def loadFromFile(path, hook=None):
 
 
 def restoreBankLog(dct):
+    '''JSON 에서 읽어 리스트가 된 거래 내역 항목을 다시 튜플로 되돌린다.'''
     # json에 데이터를 저장할 때 튜플->리스트가 되므로 로드할 때 리스트를 튜플로 바꿔줌
     if config.BANK_LOG in dct:
         for idx, item in enumerate(dct[config.BANK_LOG]):
