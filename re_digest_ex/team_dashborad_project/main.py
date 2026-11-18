@@ -18,12 +18,14 @@ onRunning = True
 
 
 def exit():
+    '''반복을 멈추도록 표시하고 모든 데이터를 파일에 저장한다.'''
     global onRunning
     onRunning = False
     fileManager.dbSaveAllAtFile()
 
 
 def notImplemented():
+    '''아직 구현되지 않은 메뉴임을 알린다.'''
     print("아직 구현되지 않은 기능입니다.")
 
 
@@ -43,6 +45,7 @@ signOutActions = {
 
 
 def makePromptAndActions(onSignedIn):
+    '''로그인 여부에 맞는 메뉴 문구와 (번호 → 실행 함수) 딕셔너리를 만들어 돌려준다.'''
     text = ""
     actions = {}
 
@@ -68,6 +71,7 @@ def makePromptAndActions(onSignedIn):
 
 
 def main():
+    '''파일에서 데이터를 불러온 뒤 종료할 때까지 메뉴를 반복하고, 끝나면 저장한다.'''
     fileManager.dbLoadAllFromFile()
 
     while onRunning:
