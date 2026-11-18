@@ -4,16 +4,19 @@ from bankAccount import bankAccount
 
 
 def isExistsId(id):
+    '''이미 가입된 아이디이면 True 를 돌려준다.'''
     return id in dbManager.getMemberIds()
 
 
 def isValidAccount(id, pw):
+    '''아이디가 있고 비밀번호가 맞으면 True 를 돌려준다. 아니면 None.'''
     if isExistsId(id):
         if pw == dbManager.getMemberPw(id):
             return True
 
 
 def signUp():
+    '''아이디 중복을 확인하고 회원 정보를 입력받아 가입시킨 뒤 계좌를 만든다.'''
     id = input("아이디: ")
 
     if isExistsId(id):
@@ -41,6 +44,7 @@ def signUp():
 
 
 def signIn():
+    '''아이디와 비밀번호를 확인해 맞으면 로그인 상태(session)로 만든다.'''
     id = input("아이디: ")
     pw = input("패스워드: ")
 
@@ -53,5 +57,6 @@ def signIn():
 
 
 def signOut():
+    '''로그인 정보를 지워 로그아웃한다.'''
     print("로그아웃 완료.")
     session.signinedId = ""
