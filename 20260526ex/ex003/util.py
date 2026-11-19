@@ -1,3 +1,4 @@
+'''날짜와 시각 문자열을 돌려주는 유틸 모듈.'''
 import time
 
 def getDay():
