@@ -1,4 +1,4 @@
-#정수
+# 정수
 num = 10
 print(type(num))
 
