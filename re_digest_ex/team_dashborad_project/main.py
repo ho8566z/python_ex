@@ -29,6 +29,7 @@ def notImplemented():
     print("아직 구현되지 않은 기능입니다.")
 
 
+# 로그인한 상태에서 고를 수 있는 메뉴 번호 → 실행할 함수
 signInedActions = {
     OPT_SIGN_OUT: memberService.signOut,
     OPT_MODIFY: notImplemented,
@@ -37,6 +38,7 @@ signInedActions = {
     OPT_TODO: todolist.startLoop,
 }
 
+# 로그인하기 전 메뉴 번호 → 실행할 함수
 signOutActions = {
     OPT_EXIT: exit,
     OPT_SIGN_UP: memberService.signUp,
@@ -78,11 +80,13 @@ def main():
         prompt, actions = makePromptAndActions(session.onSignIned())
         selected = input(f"\n{prompt}\n:")
 
+        # 없는 번호를 입력하면 action 이 None 이라 아무것도 하지 않고 메뉴를 다시 보여 준다
         action = actions.get(selected)
         action() if action else None
 
     fileManager.dbSaveAllAtFile()
     
+# 이 파일을 직접 실행했을 때만 프로그램을 시작한다(다른 파일에서 import 할 때는 실행하지 않는다)
 if __name__ == "__main__":
     from db import fileManager
 
